@@ -31,7 +31,7 @@ Copy each phase into an AI coding assistant in order. Each phase assumes the pre
 > - Home · Herb library (`/herbs/`) + one page per herb · Health concerns (`/concerns/`) + 8 hubs · Interaction checker · Mizaj quiz · Learn (`/learn/`) + 10 guides · Unani glossary · Videos
 > - Find a practitioner (lead form) · List your practice · Support · Contests · Careers · Advertise and sponsor
 > - About · Editorial policy · How we grade evidence · Contact · Medical disclaimer · Privacy · Cookies · Terms · Trademark and copyright · 404
-> - `sitemap.xml`, `robots.txt`, `ads.txt`, `site.webmanifest`, `.nojekyll`
+> - `sitemap.xml`, `robots.txt`, `ads.txt`, `site.webmanifest`
 >
 > Every page: a top bar reading "Contact, if you are interested in this website / domain name / sponsorship / advertisement / partnership" linked to https://web.works/contact; header with search, theme toggle, mobile menu and a "Find a practitioner" button; footer with newsletter, link columns, disclaimer and trademark line.
 
@@ -95,7 +95,7 @@ Copy each phase into an AI coding assistant in order. Each phase assumes the pre
 
 > - Build with `python3 _build/build.py`. Run a link checker, an address-leak grep, and headless browser tests: library filters, checker results, quiz completion and marker, multi-step validation and submission, donation toggle, countdown, search, theme, AdSense presence/absence, top banner on every page.
 > - Screenshot desktop and 390px mobile, light and dark.
-> - Push to `WEBWORKSA1/hakeem-com` (public, free plan). Publish with GitHub Pages from the `gh-pages` branch (kept in sync by the Publish workflow) or from `main` / root.
+> - Push to `WEBWORKSA1/hakeem-com` (public, free plan). Generate a Jekyll source tree (layouts, page files with front matter, data) so GitHub Pages builds the site natively from `main` / root with no workflow; add `CNAME` for the custom domain.
 > - Custom domain: add `CNAME` with `hakeem.com`, set DNS, enforce HTTPS, then apply to AdSense with hakeem.com.
 
 ## Phase 11 — Growth roadmap (expandable)

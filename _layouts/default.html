@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en" data-root="{{ page.v_root }}">
+<head>
+<meta charset="utf-8">{% if page.v_base %}
+<script>(function(){var p=location.pathname.split('/'),b=/github\.io$/.test(location.hostname)&&p[1]?'/'+p[1]+'/':'/';document.write('<base href="'+b+'">')})();</script>
+<meta name="robots" content="noindex">{% endif %}
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ page.v_t }}</title>
+<meta name="description" content="{{ page.v_d }}">
+<link rel="canonical" href="{{ page.v_c }}">
+<meta property="og:type" content="{{ page.v_ogt }}">
+<meta property="og:site_name" content="Hakeem.com">
+<meta property="og:title" content="{{ page.v_t }}">
+<meta property="og:description" content="{{ page.v_d }}">
+<meta property="og:url" content="{{ page.v_c }}">{% assign hk_png = site.static_files | where: "path", "/assets/img/og.png" | first %}{% if hk_png %}
+<meta property="og:image" content="https://hakeem.com/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="apple-touch-icon" href="{{ page.v_root }}assets/img/icon-192.png">{% endif %}
+<meta name="theme-color" content="#1F2A44">
+<meta name="google-adsense-account" content="ca-pub-6620975821265271">
+<link rel="icon" href="{{ page.v_root }}assets/img/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="{{ page.v_root }}site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Alegreya+Sans:wght@400;500;700&family=Amiri:wght@400;700&display=swap">
+<link rel="stylesheet" href="{{ page.v_root }}assets/css/main.css?v=20261029">
+<script>try{var t=localStorage.getItem('hk-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+{% unless page.v_noads %}<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6620975821265271" crossorigin="anonymous"></script>{% endunless %}
+{{ page.v_ld }}
+</head>
+<body class="{{ page.v_cls }}">
+<a class="skip" href="#main">Skip to content</a>
+<div class="interest"><a href="https://web.works/contact" target="_blank" rel="noopener"><b>Contact,</b> if you are interested in this website / domain name / sponsorship / advertisement / partnership</a></div>
+<header class="site-header">
+ <div class="wrap nav">
+  <a class="brand" href="{{ page.v_root }}index.html" aria-label="Hakeem.com home"><span class="brand-mark" lang="ar" aria-hidden="true">حكيم</span><span class="brand-name">Hakeem<span>.com</span></span></a>
+  <nav aria-label="Main"><ul class="menu" id="menu"><li><a href="{{ page.v_root }}herbs/">Herbs</a></li><li><a href="{{ page.v_root }}interactions.html">Interactions</a></li><li><a href="{{ page.v_root }}mizaj.html">Mizaj quiz</a></li><li><a href="{{ page.v_root }}concerns/">Concerns</a></li><li><a href="{{ page.v_root }}learn/">Learn</a></li><li><a href="{{ page.v_root }}videos.html">Videos</a></li><li><a href="{{ page.v_root }}support.html">Support</a></li><li class="menu-cta"><a href="{{ page.v_root }}contests.html">Contests</a></li><li class="menu-cta"><a class="btn btn-primary" href="{{ page.v_root }}consult.html">Find a practitioner</a></li></ul></nav>
+  <div class="nav-tools">
+   <button class="icon-btn" id="searchBtn" type="button" aria-label="Search herbs and guides"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+   <button class="icon-btn" id="themeBtn" type="button" aria-label="Switch light or dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+   <button class="icon-btn burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+   <a class="btn btn-primary btn-small btn-cta" href="{{ page.v_root }}consult.html">Find a practitioner</a>
+  </div>
+ </div>
+</header>
+<main id="main">
+{{ content }}
+</main>
+<footer class="site-footer">
+ <div class="wrap">
+  <div class="foot-grid">
+   <div class="foot-brand">
+    <a class="brand" href="{{ page.v_root }}index.html"><span class="brand-mark" lang="ar" aria-hidden="true">حكيم</span><span class="brand-name" style="color:#fff">Hakeem<span style="color:#A9B2C6">.com</span></span></a>
+    <p>Traditional herbal medicine, checked against modern evidence. Free to read, funded by readers, sponsors and advertising.</p>
+    <p class="small" style="margin-bottom:4px">Herb of the Week, every Sunday:</p>
+    <form class="js-form" data-subject="Newsletter signup" data-ok="You are on the list. Herb of the Week arrives on Sundays."><div class="foot-news"><label class="sr-only" for="nl-f">Email address</label><input id="nl-f" name="email" type="email" required placeholder="Your email" autocomplete="email"><input type="hidden" name="list" value="Herb of the Week"><input class="hp" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn btn-primary btn-small" type="submit">Subscribe</button></div><div class="form-msg" role="status"></div></form>
+   </div>
+   <div><h4>Explore</h4><ul>
+    <li><a href="{{ page.v_root }}herbs/">Herb library</a></li><li><a href="{{ page.v_root }}concerns/">Health concerns</a></li><li><a href="{{ page.v_root }}interactions.html">Interaction checker</a></li>
+    <li><a href="{{ page.v_root }}mizaj.html">Mizaj quiz</a></li><li><a href="{{ page.v_root }}glossary.html">Unani glossary</a></li><li><a href="{{ page.v_root }}videos.html">Videos</a></li></ul></div>
+   <div><h4>Learn</h4><ul>
+    <li><a href="{{ page.v_root }}learn/what-is-unani-medicine.html">What is Unani medicine?</a></li><li><a href="{{ page.v_root }}learn/four-temperaments-explained.html">The four temperaments</a></li>
+    <li><a href="{{ page.v_root }}learn/herb-drug-interactions.html">Herb–drug interactions</a></li><li><a href="{{ page.v_root }}learn/buying-safe-herbal-products.html">Buying safe products</a></li><li><a href="{{ page.v_root }}learn/">All guides</a></li></ul></div>
+   <div><h4>Get involved</h4><ul>
+    <li><a href="{{ page.v_root }}consult.html">Find a practitioner</a></li><li><a href="{{ page.v_root }}practitioners.html">List your practice</a></li><li><a href="{{ page.v_root }}support.html">Support Hakeem.com</a></li>
+    <li><a href="{{ page.v_root }}contests.html">Contests and prizes</a></li><li><a href="{{ page.v_root }}careers.html">Careers</a></li><li><a href="{{ page.v_root }}advertise.html">Advertise and sponsor</a></li></ul></div>
+   <div><h4>About</h4><ul>
+    <li><a href="{{ page.v_root }}about.html">About us</a></li><li><a href="{{ page.v_root }}editorial-policy.html">Editorial policy</a></li><li><a href="{{ page.v_root }}evidence-method.html">How we grade evidence</a></li>
+    <li><a href="{{ page.v_root }}contact.html">Contact</a></li><li><a href="{{ page.v_root }}disclaimer.html">Medical disclaimer</a></li><li><a href="{{ page.v_root }}privacy.html">Privacy policy</a></li>
+    <li><a href="{{ page.v_root }}cookies.html">Cookie policy</a></li><li><a href="{{ page.v_root }}terms.html">Terms of use</a></li><li><a href="{{ page.v_root }}trademark.html">Trademark and copyright</a></li></ul></div>
+  </div>
+  <div class="foot-legal">
+   <span>&copy; <span class="year">{{ site.time | date: "%Y" }}</span> Hakeem.com. Educational information only, not medical advice. In an emergency call your local emergency number.</span>
+   <span>"Hakeem" is used as a descriptive word. Not affiliated with any person, clinic or brand of that name. <a href="{{ page.v_root }}trademark.html">Disclosure</a></span>
+  </div>
+ </div>
+</footer>
+<div class="search-dlg" id="searchDlg" role="dialog" aria-modal="true" aria-label="Search">
+ <div class="search-box">
+  <label class="sr-only" for="searchInput">Search herbs, concerns and guides</label>
+  <input id="searchInput" type="search" placeholder="Search herbs, concerns and guides" autocomplete="off">
+  <ul class="search-res" id="searchRes"></ul>
+  <p class="small muted mb0" style="margin-top:10px">Press <span class="kbd">Esc</span> to close.</p>
+ </div>
+</div>
+<div class="cookie" id="cookie" role="region" aria-label="Cookie notice">
+ <b>Cookies on Hakeem.com</b>
+ <p class="mb0">We use cookies for essential features, and our advertising partner Google uses cookies to show and measure ads. <a href="{{ page.v_root }}cookies.html">Cookie policy</a></p>
+ <div class="btns"><button class="btn btn-ink btn-small" data-cookie="all" type="button">Accept</button><button class="btn btn-line btn-small" data-cookie="essential" type="button">Essential only</button></div>
+</div>
+<script src="{{ page.v_root }}assets/js/main.js?v=20261029" defer></script>
+</body>
+</html>

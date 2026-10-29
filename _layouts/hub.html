@@ -1,0 +1,17 @@
+---
+layout: default
+---
+<section class="page-hero"><div class="wrap">
+ <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a> / <a href="../concerns/">Health concerns</a> / {{ page.v_title }}</nav>
+ <h1>{{ page.v_title }}</h1><p class="lead">{{ page.v_intro }}</p></div></section>
+<section><div class="wrap article"><div class="prose">
+ <h2 class="mt0">Herbs reviewed for {{ page.v_title_l }}</h2>
+ <table class="ev-table"><thead><tr><th>Herb</th><th>Best evidence</th><th>For this concern</th></tr></thead><tbody>{{ page.v_rows }}</tbody></table>
+ 
+ <h2>See a doctor first if you have</h2>
+ <div class="caution"><ul>{{ page.v_red }}</ul></div>
+ <h2>How to use this page</h2>
+ <p>{{ page.v_advice }}</p>
+ <p>Evidence grades describe the strongest use we found for each herb, as explained in <a href="../evidence-method.html">our method</a>. Open a herb page for its full safety profile before trying it.</p>
+</div><aside><div class="aside-sticky"><div class="aside-box"><h3>Want a personal plan?</h3><p class="small muted">A qualified practitioner can look at your history and medicines.</p><a class="btn btn-primary btn-small" href="../consult.html?concern={{ page.v_slug }}">Request a consultation</a></div>
+ <div class="aside-box"><h3>Check interactions</h3><p class="small muted">Taking prescription medicines? Check before you add any herb.</p><a href="../interactions.html">Open the checker</a></div></div></aside></div></section>

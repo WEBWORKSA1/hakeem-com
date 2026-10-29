@@ -1,0 +1,50 @@
+---
+layout: default
+v_root: ''
+v_t: 'Herb–drug interaction checker | Hakeem.com'
+v_d: 'Check common herbs such as St. John&#x27;s wort, ginkgo, turmeric and licorice against blood thinners, diabetes, blood pressure and other medicines.'
+v_c: 'https://hakeem.com/interactions.html'
+v_ogt: 'website'
+v_ld: ''
+v_cls: ''
+---
+{% raw %}<section class="page-hero">
+ <div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> / Interaction checker</nav>
+  <h1>Herb–drug interaction checker</h1>
+  <p class="lead">Herbs can change how medicines work: some make blood thinners stronger, some make birth control fail, some push blood sugar too low. Tick what you take to see the documented risks.</p>
+ </div>
+</section>
+<section style="padding-top:32px">
+ <div class="wrap">
+  <div class="caution" style="margin-top:0"><b>This tool covers well-documented interactions only.</b> An empty result is not proof that a combination is safe. Always show your full list of medicines and supplements to your pharmacist or doctor, and never stop a prescribed medicine on your own.</div>
+  <div class="ix-tool"><div class="ix-pick"><h3>1. Herbs and supplements</h3><label><input type="checkbox" name="ixh" value="aloe-vera"> Aloe vera</label><label><input type="checkbox" name="ixh" value="amla"> Amla (Indian gooseberry)</label><label><input type="checkbox" name="ixh" value="ashwagandha"> Ashwagandha</label><label><input type="checkbox" name="ixh" value="black-seed"> Black seed</label><label><input type="checkbox" name="ixh" value="chamomile"> Chamomile</label><label><input type="checkbox" name="ixh" value="cinnamon"> Cinnamon</label><label><input type="checkbox" name="ixh" value="clove"> Clove</label><label><input type="checkbox" name="ixh" value="coriander"> Coriander</label><label><input type="checkbox" name="ixh" value="echinacea"> Echinacea</label><label><input type="checkbox" name="ixh" value="fennel"> Fennel</label><label><input type="checkbox" name="ixh" value="fenugreek"> Fenugreek</label><label><input type="checkbox" name="ixh" value="garlic"> Garlic</label><label><input type="checkbox" name="ixh" value="ginger"> Ginger</label><label><input type="checkbox" name="ixh" value="ginkgo"> Ginkgo</label><label><input type="checkbox" name="ixh" value="green-tea"> Green tea</label><label><input type="checkbox" name="ixh" value="holy-basil"> Holy basil (Tulsi)</label><label><input type="checkbox" name="ixh" value="licorice"> Licorice root</label><label><input type="checkbox" name="ixh" value="moringa"> Moringa</label><label><input type="checkbox" name="ixh" value="neem"> Neem</label><label><input type="checkbox" name="ixh" value="peppermint"> Peppermint</label><label><input type="checkbox" name="ixh" value="psyllium"> Psyllium (Isabgol)</label><label><input type="checkbox" name="ixh" value="saffron"> Saffron</label><label><input type="checkbox" name="ixh" value="senna"> Senna</label><label><input type="checkbox" name="ixh" value="st-johns-wort"> St. John&#x27;s wort</label><label><input type="checkbox" name="ixh" value="almond"> Sweet almond</label><label><input type="checkbox" name="ixh" value="turmeric"> Turmeric</label></div><div class="ix-pick"><h3>2. Medicines and situations</h3><label title="warfarin, apixaban, rivaroxaban, clopidogrel, daily aspirin"><input type="checkbox" name="ixm" value="anticoag"> Blood thinners</label><label title="insulin, metformin, gliclazide and other sulfonylureas"><input type="checkbox" name="ixm" value="diabetes"> Diabetes medicines</label><label title="amlodipine, ramipril, losartan, beta-blockers such as nadolol"><input type="checkbox" name="ixm" value="bp"> Blood pressure medicines</label><label title="SSRIs, SNRIs, MAOIs, triptans, tramadol"><input type="checkbox" name="ixm" value="antidep"> Antidepressants and serotonin drugs</label><label title="the pill, patch, ring, implant, hormone replacement"><input type="checkbox" name="ixm" value="hormones"> Hormonal birth control and HRT</label><label title="cyclosporine, tacrolimus, steroids at high dose"><input type="checkbox" name="ixm" value="immuno"> Transplant and immune-suppressing drugs</label><label title="protease inhibitors such as saquinavir, NNRTIs"><input type="checkbox" name="ixm" value="hiv"> HIV and hepatitis C antivirals</label><label title="levothyroxine, carbimazole"><input type="checkbox" name="ixm" value="thyroid"> Thyroid medicines</label><label title="benzodiazepines, zolpidem, some antihistamines, alcohol"><input type="checkbox" name="ixm" value="sedative"> Sedatives and sleep medicines</label><label title="furosemide, hydrochlorothiazide, digoxin"><input type="checkbox" name="ixm" value="potassium"> Diuretics and heart-rhythm drugs</label><label title="high-dose paracetamol/acetaminophen, methotrexate, isoniazid"><input type="checkbox" name="ixm" value="liver"> Medicines that can strain the liver</label><label title="omeprazole and other PPIs, famotidine, antacids"><input type="checkbox" name="ixm" value="acid"> Acid reducers</label><label title="lithium carbonate"><input type="checkbox" name="ixm" value="lithium"> Lithium</label><label title="ADHD stimulants, decongestants, theophylline"><input type="checkbox" name="ixm" value="stimulant"> Stimulants and theophylline</label><label title="chemotherapy, targeted therapy, some hormone therapies"><input type="checkbox" name="ixm" value="chemo"> Cancer treatment</label><label title="absorption can be reduced if taken at the same time"><input type="checkbox" name="ixm" value="anyoral"> Any medicine taken by mouth</label><label title="including dental surgery"><input type="checkbox" name="ixm" value="surgery"> Surgery in the next two weeks</label><label title="including trying to conceive"><input type="checkbox" name="ixm" value="pregnancy"> Pregnancy or breastfeeding</label></div></div>
+  <p class="mt1"><button class="btn btn-line btn-small" type="button" id="ixClear">Clear all</button></p>
+  <div class="ix-results" id="ixResults" aria-live="polite"></div>
+  <div class="grid g3 mt2">
+   <div class="card"><h3>Avoid</h3><p class="muted">A serious interaction is documented. Do not combine without your prescriber's approval.</p></div>
+   <div class="card"><h3>Use caution</h3><p class="muted">The combination may cause harm for some people. Talk to your pharmacist before starting.</p></div>
+   <div class="card"><h3>Monitor</h3><p class="muted">A smaller or theoretical effect. Watch for changes and tell your care team.</p></div>
+  </div>
+ </div>
+</section>
+<section class="band">
+ <div class="wrap article">
+  <div class="prose">
+   <h2 class="mt0">Why herbs interact with medicines</h2>
+   <p>Most interactions happen in one of three ways. Some herbs speed up or slow down the liver enzymes that clear medicines from the body, which changes how much of the drug stays in your blood. St. John's wort is the best-known example: it can lower the levels of birth control pills, transplant drugs and some HIV medicines enough to make them fail.</p>
+   <p>Other herbs add to a medicine's effect. Garlic, ginkgo and high-dose turmeric can slow clotting, so they add to the effect of blood thinners. Fenugreek and black seed can lower blood sugar, which adds to diabetes medicines. The third route is absorption: fibre such as psyllium can bind medicines in the gut if they are taken at the same time.</p>
+   <h2>Four habits that prevent most problems</h2>
+   <ol>
+    <li>Keep a written list of every medicine, vitamin and herbal product you take, including teas taken daily.</li>
+    <li>Show it to your pharmacist whenever a new medicine is started.</li>
+    <li>Stop herbal supplements two weeks before planned surgery unless your surgeon says otherwise.</li>
+    <li>Start one new product at a time, so you can tell what caused any change.</li>
+   </ol>
+   <p>Read more in our guide to <a href="learn/herb-drug-interactions.html">herb–drug interactions</a>.</p>
+  </div>
+  <aside><div class="aside-box"><h3>Need a review?</h3><p class="small muted">A practitioner who works alongside your doctor can review your full list.</p><a class="btn btn-primary btn-small" href="consult.html?concern=Medicine+review">Request a consultation</a></div></aside>
+ </div>
+</section>
+<script src="assets/js/ix-data.js"></script>
+{% endraw %}

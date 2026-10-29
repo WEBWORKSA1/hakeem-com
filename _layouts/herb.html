@@ -1,0 +1,74 @@
+---
+layout: default
+---
+<article>
+<section class="page-hero" style="padding-bottom:36px">
+ <div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a> / <a href="../herbs/">Herb library</a> / {{ page.v_name }}</nav>
+  <div class="herb-head">
+   <div>
+    <h1>{{ page.v_name }}</h1>
+    <p class="latin">{{ page.v_latin }}</p>
+    <ul class="names">{{ page.v_names }}</ul>
+    <dl class="facts">
+     <dt>Plant family</dt><dd>{{ page.v_family }}</dd>
+     <dt>Parts used</dt><dd>{{ page.v_parts }}</dd>
+     <dt>Common forms</dt><dd>{{ page.v_forms }}</dd>
+     <dt>Traditions</dt><dd>{{ page.v_trads }}</dd>
+     <dt>Best evidence</dt><dd>{{ page.v_best }}</dd>
+     {{ page.v_hubs }}
+    </dl>
+   </div>
+   {{ page.v_mini }}
+  </div>
+ </div>
+</section>
+<section style="padding-top:36px">
+ <div class="wrap article">
+  <div class="prose">
+   <div class="reviewed"><span>By <b>Hakeem.com Editorial Team</b></span><span>Reviewed against cited sources <b>29 October 2026</b></span><span><a href="../evidence-method.html">How we grade evidence</a></span></div>
+   <p class="summary">{{ page.v_summary }}</p>
+   <div class="note"><b>Our take.</b> {{ page.v_verdict }}</div>
+   <h2 id="evidence">What the evidence says</h2>
+   <table class="ev-table"><thead><tr><th>Use</th><th>Evidence</th><th>What we found</th></tr></thead><tbody>{{ page.v_uses }}</tbody></table>
+   <p>{{ page.v_research }}</p>
+   
+   <h2 id="safety">Safety and who should avoid it</h2>
+   <div class="caution"><h3>Side effects and cautions</h3><ul>{{ page.v_safety }}</ul></div>
+   <h3>Who should avoid it or ask first</h3>
+   <ul>{{ page.v_avoid }}</ul>
+   <h2 id="interactions">Medicine interactions</h2>
+   {{ page.v_ix }}
+   <p><a href="../interactions.html?h={{ page.v_slug }}">Check {{ page.v_name_l }} against your medicines</a></p>
+   <h2 id="tradition">Traditional use</h2>
+   <p class="muted" style="font-family:var(--sans);font-size:1rem">How each tradition has used this plant. Traditional use describes history, not proof that it works.</p>
+   {{ page.v_trad }}
+   <h2 id="confuse">Do not confuse with</h2>
+   <p>{{ page.v_confuse }}</p>
+   <h2 id="buying">Buying and quality</h2>
+   <p>{{ page.v_buying }} See our <a href="../learn/buying-safe-herbal-products.html">guide to buying safe herbal products</a>.</p>
+   <h2 id="refs">Sources</h2>
+   <ol class="refs">{{ page.v_refs }}</ol>
+   
+   <p class="small muted" style="font-family:var(--sans)">This page is for education and does not replace advice from your doctor, pharmacist or a qualified practitioner. Spotted an error? <a href="../contact.html?topic=Correction">Tell us</a>.</p>
+  </div>
+  <aside>
+   <div class="aside-sticky">
+    <div class="aside-box toc"><h3>On this page</h3><ol>
+     <li><a href="#evidence">Evidence</a></li><li><a href="#safety">Safety</a></li><li><a href="#interactions">Interactions</a></li>
+     <li><a href="#tradition">Traditional use</a></li><li><a href="#confuse">Do not confuse with</a></li><li><a href="#buying">Buying</a></li><li><a href="#refs">Sources</a></li></ol></div>
+    <div class="aside-box"><h3>Ask a practitioner about {{ page.v_name_l }}</h3><p class="small muted">Get matched with a qualified practitioner who can check it against your health and medicines.</p>
+     <a class="btn btn-primary btn-small" href="../consult.html?herb={{ page.v_name_q }}">Request a consultation</a></div>
+    <div class="aside-box"><h3>Adopt this herb</h3><p class="small muted">Sponsors fund the upkeep of a herb page and get a credit line. No influence over content.</p>
+     <a href="../advertise.html#adopt">Adopt {{ page.v_name_l }}</a></div>
+   </div>
+  </aside>
+ </div>
+</section>
+</article>
+<section class="band section-tight">
+ <div class="wrap">
+  <div class="section-head"><h2>Related herbs</h2></div>
+  <div class="labels">{% for s in page.v_rel %}{{ site.data.tiles[s] }}{% endfor %}</div>
+ </div>
+</section>
