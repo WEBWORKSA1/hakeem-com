@@ -1,0 +1,120 @@
+title: Hakeem.com: herbal and traditional medicine, checked against evidence
+description: An evidence-graded guide to Unani, Ayurvedic and other herbal remedies: what works, what is unproven, and what interacts with your medicines.
+---
+<section class="hero">
+ <div class="wrap hero-grid">
+  <div>
+   <h1>Old remedies, honest evidence.</h1>
+   <p class="lead">Hakeem.com checks the herbs of Unani, Ayurveda and other healing traditions against modern research, so you can see what works, what is unproven, and what is unsafe with your medicines.</p>
+   <form class="hero-search" id="heroSearch" role="search">
+    <label class="sr-only" for="hq">Search the herb library</label>
+    <input id="hq" type="search" placeholder="Try kalonji, ashwagandha or isabgol" autocomplete="off">
+    <button class="btn btn-ink" type="submit">Search</button>
+   </form>
+   <p class="hero-hints">Popular: <a href="{{root}}herbs/black-seed.html">Kalonji</a> <a href="{{root}}herbs/ashwagandha.html">Ashwagandha</a> <a href="{{root}}herbs/turmeric.html">Haldi</a> <a href="{{root}}herbs/psyllium.html">Isabgol</a> <a href="{{root}}herbs/licorice.html">Mulethi</a></p>
+   <p class="small muted mt2" style="max-width:46ch">Every profile is graded on a five-level evidence scale and cites the US National Institutes of Health, Memorial Sloan Kettering, the European Medicines Agency or peer-reviewed reviews.</p>
+  </div>
+  {{block:tmap}}
+ </div>
+</section>
+
+<section class="section-tight">
+ <div class="wrap">
+  <div class="tools-list">
+   <a href="{{root}}herbs/"><h3>Herb library</h3><p>{{block:herb_count}} remedies with names in Urdu, Arabic and Hindi, evidence by use, safety and sources.</p><span class="go">Browse the library</span></a>
+   <a href="{{root}}interactions.html"><h3>Interaction checker</h3><p>Tick your herbs and medicines. See which combinations to avoid, use with caution or monitor.</p><span class="go">Check my medicines</span></a>
+   <a href="{{root}}mizaj.html"><h3>Mizaj quiz</h3><p>Twelve questions place you on the classical map of temperaments: hot or cold, dry or moist.</p><span class="go">Find my temperament</span></a>
+  </div>
+ </div>
+</section>
+
+<section>
+ <div class="wrap">
+  <div class="section-head"><div><h2>Most searched remedies</h2><p>The herbs people ask a hakeem about most often, with what modern research actually shows.</p></div><a class="btn btn-line btn-small" href="{{root}}herbs/">All {{block:herb_count}} herbs</a></div>
+  {{block:labels:featured}}
+ </div>
+</section>
+
+{{block:ad:home-1}}
+
+<section class="band">
+ <div class="wrap">
+  <div class="section-head"><div><h2>How we grade evidence</h2><p>Tradition tells us how a plant has been used. Evidence tells us whether it works. We show both, and never mix them up.</p></div><a class="btn btn-line btn-small" href="{{root}}evidence-method.html">Read our method</a></div>
+  {{block:grade_scale}}
+ </div>
+</section>
+
+<section class="band-deep" id="consult">
+ <div class="wrap split">
+  <div>
+   <h2>Want a practitioner's opinion?</h2>
+   <p class="muted" style="font-size:1.15rem;max-width:46ch">Tell us what you are dealing with. We reply within two working days with next steps and, where available, introductions to qualified practitioners of Unani, Ayurveda, Chinese medicine or herbalism, in person or by video.</p>
+   <ul style="color:#C9D0DE;line-height:1.9;padding-left:1.1em">
+    <li>Free to ask, no obligation</li>
+    <li>Practitioners must show their registration where their country regulates the profession</li>
+    <li>Your details are shared only with practitioners you agree to</li>
+   </ul>
+   <p class="small" style="color:#A9B2C6">Herbal care does not replace your doctor. In an emergency, call your local emergency number.</p>
+  </div>
+  <div class="form-card" style="color:var(--ink)">
+   <form class="js-form" data-subject="Consultation request (quick form)" data-ok="Request received. We reply within two working days.">
+    <div class="row">
+     <div class="field"><label for="hm-name">First name</label><input id="hm-name" name="name" required autocomplete="given-name"></div>
+     <div class="field"><label for="hm-email">Email</label><input id="hm-email" name="email" type="email" required autocomplete="email"></div>
+    </div>
+    <div class="row">
+     <div class="field"><label for="hm-concern">What do you need help with?</label><select id="hm-concern" name="concern" required><option value="">Choose one</option>{{block:concern_options}}<option>Something else</option></select></div>
+     <div class="field"><label for="hm-trad">Preferred tradition</label><select id="hm-trad" name="tradition"><option>Not sure, recommend one</option><option>Unani (Tibb)</option><option>Ayurveda</option><option>Chinese medicine or acupuncture</option><option>Western herbalism or naturopathy</option></select></div>
+    </div>
+    <div class="field"><label for="hm-where">City and country</label><input id="hm-where" name="location" autocomplete="address-level2" placeholder="e.g. Lahore, Pakistan or online"></div>
+    <input class="hp" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <div class="field"><label class="check"><input type="checkbox" name="consent" value="Share with suitable practitioners" required> <span>Share my request with suitable practitioners. I have read the <a href="{{root}}privacy.html">privacy policy</a>.</span></label></div>
+    <button class="btn btn-primary" type="submit">Send my request</button>
+    <a class="small" style="margin-left:12px" href="{{root}}consult.html">Use the detailed form</a>
+    <div class="form-msg" role="status"></div>
+   </form>
+  </div>
+ </div>
+</section>
+
+<section>
+ <div class="wrap">
+  <div class="section-head"><div><h2>Browse by health concern</h2><p>Each page ranks the herbs by evidence and lists the warning signs that mean you should see a doctor first.</p></div></div>
+  {{block:hubs}}
+ </div>
+</section>
+
+<section class="band">
+ <div class="wrap">
+  <div class="section-head"><div><h2>Guides</h2><p>Plain-language explainers on Unani theory, safety and how to judge a health claim.</p></div><a class="btn btn-line btn-small" href="{{root}}learn/">All {{block:guide_count}} guides</a></div>
+  {{block:guides:home}}
+ </div>
+</section>
+
+{{block:ad:home-2}}
+
+<section>
+ <div class="wrap">
+  <div class="section-head"><div><h2>Watch and learn</h2><p>Hand-picked talks from WHO, TED, Mayo Clinic and university channels.</p></div><a class="btn btn-line btn-small" href="{{root}}videos.html">All videos</a></div>
+  {{block:videos:home}}
+ </div>
+</section>
+
+<section class="band">
+ <div class="wrap">
+  <h2>Help build Hakeem.com</h2>
+  <div class="grid g4 mt1">
+   <div class="card"><h3>Support the work</h3><p class="muted">Readers fund source checks, safety reviews and translations. One-time or monthly.</p><a href="{{root}}support.html">Become a supporter</a></div>
+   <div class="card"><h3>Enter a contest</h3><p class="muted">Medicinal plant photos, family remedy stories and a herb quiz. Cash prizes every season.</p><a href="{{root}}contests.html">See this season's contests</a></div>
+   <div class="card"><h3>List your practice</h3><p class="muted">Registered Unani, Ayurvedic and herbal practitioners can apply to join the directory.</p><a href="{{root}}practitioners.html">Apply to be listed</a></div>
+   <div class="card"><h3>Work with us</h3><p class="muted">We are hiring reviewers, writers, translators and video editors, remote.</p><a href="{{root}}careers.html">Open roles</a></div>
+  </div>
+ </div>
+</section>
+
+<section class="section-tight">
+ <div class="wrap split" style="align-items:center">
+  <div><h2 class="mb0">Herb of the Week</h2><p class="muted mb0">One herb, its evidence and a safety tip, every Sunday. Free, and you can unsubscribe in one click.</p></div>
+  <div>{{block:newsletter}}</div>
+ </div>
+</section>

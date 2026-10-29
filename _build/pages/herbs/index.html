@@ -1,0 +1,58 @@
+title: Herb library: Unani, Ayurvedic and herbal remedies graded by evidence
+description: Browse herbal remedies by name, tradition, temperament, health concern and strength of evidence, with Urdu, Arabic and Hindi names.
+---
+<section class="page-hero">
+ <div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="{{root}}index.html">Home</a> / Herb library</nav>
+  <h1>Herb library</h1>
+  <p class="lead">{{block:herb_count}} remedies from Unani, Ayurveda, Chinese medicine and Western herbalism. Search by English, Latin, Urdu or Hindi name, then filter by tradition, temperament or concern.</p>
+ </div>
+</section>
+<section style="padding-top:32px">
+ <div class="wrap">
+  <div class="filters">
+   <label class="sr-only" for="libSearch">Search herbs</label>
+   <input id="libSearch" type="search" placeholder="Search: kalonji, Withania, mulethi…" autocomplete="off">
+   <label class="sr-only" for="libConcern">Filter by concern</label>
+   <select id="libConcern" style="flex:0 1 260px"><option value="">All health concerns</option>{{block:concern_options}}</select>
+  </div>
+  <div class="filters">
+   <div class="chips" role="group" aria-label="Tradition">
+    <button class="chip" type="button" data-filter="trad" data-value="all" aria-pressed="true">All traditions</button>
+    <button class="chip" type="button" data-filter="trad" data-value="Unani" aria-pressed="false">Unani</button>
+    <button class="chip" type="button" data-filter="trad" data-value="Ayurveda" aria-pressed="false">Ayurveda</button>
+    <button class="chip" type="button" data-filter="trad" data-value="TCM" aria-pressed="false">Chinese medicine</button>
+    <button class="chip" type="button" data-filter="trad" data-value="Western herbalism" aria-pressed="false">Western herbalism</button>
+   </div>
+  </div>
+  <div class="filters">
+   <div class="chips" role="group" aria-label="Temperament">
+    <button class="chip" type="button" data-filter="temp" data-value="all" aria-pressed="true">Any temperament</button>
+    <button class="chip" type="button" data-filter="temp" data-value="safrawi" aria-pressed="false">Hot and dry</button>
+    <button class="chip" type="button" data-filter="temp" data-value="damwi" aria-pressed="false">Hot and moist</button>
+    <button class="chip" type="button" data-filter="temp" data-value="balghami" aria-pressed="false">Cold and moist</button>
+    <button class="chip" type="button" data-filter="temp" data-value="saudawi" aria-pressed="false">Cold and dry</button>
+   </div>
+   <button class="chip" type="button" data-filter="ev" data-value="1" aria-pressed="false">Moderate or strong evidence only</button>
+   <button class="chip" type="button" id="libReset">Clear filters</button>
+  </div>
+  {{block:az}}
+  <p class="muted small" id="libCount" aria-live="polite"></p>
+  {{block:labels:all}}
+  <div class="empty" id="libEmpty" hidden>No herb matches those filters. Clear a filter, or <a href="{{root}}contact.html?topic=Suggest+a+herb">suggest a herb</a> for us to review next.</div>
+ </div>
+</section>
+<section class="band section-tight">
+ <div class="wrap split">
+  <div>
+   <h2>Reading a herb profile</h2>
+   <p>Each profile opens with names in the languages you are likely to see on a label, a three-line summary and our verdict. Then comes the evidence for each use, graded from Strong to Not supported, followed by safety, medicine interactions, traditional use, look-alikes to avoid and the sources we checked.</p>
+   <p><a href="{{root}}evidence-method.html">How we grade evidence</a></p>
+  </div>
+  <div>
+   <h2>Missing a herb?</h2>
+   <p>We add new profiles every month, starting with the remedies readers ask about most. Sponsors can also <a href="{{root}}advertise.html#adopt">adopt a herb</a> to fund its review, with no say over what we write.</p>
+   <a class="btn btn-line btn-small" href="{{root}}contact.html?topic=Suggest+a+herb">Suggest a herb</a>
+  </div>
+ </div>
+</section>

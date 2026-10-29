@@ -1,0 +1,42 @@
+title: Herb–drug interaction checker
+description: Check common herbs such as St. John's wort, ginkgo, turmeric and licorice against blood thinners, diabetes, blood pressure and other medicines.
+---
+<section class="page-hero">
+ <div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="{{root}}index.html">Home</a> / Interaction checker</nav>
+  <h1>Herb–drug interaction checker</h1>
+  <p class="lead">Herbs can change how medicines work: some make blood thinners stronger, some make birth control fail, some push blood sugar too low. Tick what you take to see the documented risks.</p>
+ </div>
+</section>
+<section style="padding-top:32px">
+ <div class="wrap">
+  <div class="caution" style="margin-top:0"><b>This tool covers well-documented interactions only.</b> An empty result is not proof that a combination is safe. Always show your full list of medicines and supplements to your pharmacist or doctor, and never stop a prescribed medicine on your own.</div>
+  {{block:ix_tool}}
+  <p class="mt1"><button class="btn btn-line btn-small" type="button" id="ixClear">Clear all</button></p>
+  <div class="ix-results" id="ixResults" aria-live="polite"></div>
+  <div class="grid g3 mt2">
+   <div class="card"><h3>Avoid</h3><p class="muted">A serious interaction is documented. Do not combine without your prescriber's approval.</p></div>
+   <div class="card"><h3>Use caution</h3><p class="muted">The combination may cause harm for some people. Talk to your pharmacist before starting.</p></div>
+   <div class="card"><h3>Monitor</h3><p class="muted">A smaller or theoretical effect. Watch for changes and tell your care team.</p></div>
+  </div>
+ </div>
+</section>
+<section class="band">
+ <div class="wrap article">
+  <div class="prose">
+   <h2 class="mt0">Why herbs interact with medicines</h2>
+   <p>Most interactions happen in one of three ways. Some herbs speed up or slow down the liver enzymes that clear medicines from the body, which changes how much of the drug stays in your blood. St. John's wort is the best-known example: it can lower the levels of birth control pills, transplant drugs and some HIV medicines enough to make them fail.</p>
+   <p>Other herbs add to a medicine's effect. Garlic, ginkgo and high-dose turmeric can slow clotting, so they add to the effect of blood thinners. Fenugreek and black seed can lower blood sugar, which adds to diabetes medicines. The third route is absorption: fibre such as psyllium can bind medicines in the gut if they are taken at the same time.</p>
+   <h2>Four habits that prevent most problems</h2>
+   <ol>
+    <li>Keep a written list of every medicine, vitamin and herbal product you take, including teas taken daily.</li>
+    <li>Show it to your pharmacist whenever a new medicine is started.</li>
+    <li>Stop herbal supplements two weeks before planned surgery unless your surgeon says otherwise.</li>
+    <li>Start one new product at a time, so you can tell what caused any change.</li>
+   </ol>
+   <p>Read more in our guide to <a href="{{root}}learn/herb-drug-interactions.html">herb–drug interactions</a>.</p>
+  </div>
+  <aside><div class="aside-box"><h3>Need a review?</h3><p class="small muted">A practitioner who works alongside your doctor can review your full list.</p><a class="btn btn-primary btn-small" href="{{root}}consult.html?concern=Medicine+review">Request a consultation</a></div></aside>
+ </div>
+</section>
+<script src="{{root}}assets/js/ix-data.js"></script>
