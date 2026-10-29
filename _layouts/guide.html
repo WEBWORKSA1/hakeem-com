@@ -1,0 +1,22 @@
+---
+layout: default
+---
+
+<article>
+<section class="page-hero"><div class="wrap"><div style="max-width:780px">
+ <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a> / <a href="../learn/">Learn</a> / {{ page.v_cat }}</nav>
+ <h1>{{ page.v_title }}</h1><p class="lead">{{ page.v_summary }}</p></div></div></section>
+<section style="padding-top:30px"><div class="wrap article">
+ <div class="prose">
+  <div class="reviewed"><span>By <b>Hakeem.com Editorial Team</b></span><span>Reviewed <b>29 October 2026</b></span><span>{{ page.v_minutes }} min read</span></div>
+  {{ content }}
+  <hr>
+  <p class="small muted" style="font-family:var(--sans)">Educational information only. It does not replace advice from your doctor, pharmacist or a qualified practitioner. <a href="../editorial-policy.html">Editorial policy</a>. Spotted an error? <a href="../contact.html?topic=Correction">Tell us</a>.</p>
+ </div>
+ <aside><div class="aside-sticky">
+  {{ page.v_toc }}
+  <div class="aside-box"><h3>Talk it through</h3><p class="small muted">Get matched with a qualified practitioner.</p><a class="btn btn-primary btn-small" href="../consult.html">Request a consultation</a></div>
+  <div class="aside-box"><h3>More guides</h3><ul class="plain-list" style="font-size:.97rem">{{ page.v_others }}</ul></div>
+ </div></aside>
+</div></section>
+</article>
