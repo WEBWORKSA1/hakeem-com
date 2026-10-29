@@ -1,0 +1,43 @@
+---
+layout: default
+v_root: ''
+v_t: 'Contact Hakeem.com'
+v_d: 'Contact Hakeem.com with questions, corrections, herb suggestions, partnership ideas or privacy requests.'
+v_c: 'https://hakeem.com/contact.html'
+v_ogt: 'website'
+v_ld: ''
+v_cls: ''
+---
+{% raw %}<section class="page-hero">
+ <div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> / Contact</nav>
+  <h1>Contact us</h1>
+  <p class="lead">Questions, corrections, herb suggestions, partnership ideas or privacy requests. We reply within two working days.</p>
+ </div>
+</section>
+<section style="padding-top:34px">
+ <div class="wrap split">
+  <div class="form-card">
+   <form class="js-form" data-subject="Contact form" data-ok="Message sent. We reply within two working days.">
+    <div class="row">
+     <div class="field"><label for="ct-name">Name</label><input id="ct-name" name="name" required autocomplete="name"></div>
+     <div class="field"><label for="ct-email">Email</label><input id="ct-email" name="email" type="email" required autocomplete="email"></div>
+    </div>
+    <div class="field"><label for="ct-topic">Topic</label>
+     <select id="ct-topic" name="topic" data-prefill="topic"><option>General question</option><option>Correction</option><option>Suggest a herb</option><option>Practitioner directory</option><option>Advertising or sponsorship</option><option>Partnership</option><option>Buying this website or domain</option><option>Contests</option><option>Careers</option><option>Privacy request</option></select></div>
+    <div class="field"><label for="ct-page">Page you are writing about (optional)</label><input id="ct-page" name="page_reference" placeholder="e.g. the turmeric profile"></div>
+    <div class="field"><label for="ct-msg">Message</label><textarea id="ct-msg" name="message" maxlength="2000" required></textarea></div>
+    <input class="hp" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <div class="field"><label class="check"><input type="checkbox" name="consent" value="yes" required> <span>Contact me about this message. I have read the <a href="privacy.html">privacy policy</a>.</span></label></div>
+    <button class="btn btn-primary" type="submit">Send message</button>
+    <div class="form-msg" role="status"></div>
+   </form>
+  </div>
+  <div>
+   <div class="card"><h3>Buy, sponsor or partner</h3><p>Interested in this website, the domain name, sponsorship, advertisement or partnership?</p><a class="btn btn-primary" style="margin-top:6px" href="https://web.works/contact" target="_blank" rel="noopener">Contact web.works</a></div>
+   <div class="card mt1"><h3>Prefer email?</h3><p>This opens your email app with our address filled in.</p><a class="btn btn-line" href="contact.html" data-mail="Enquiry from Hakeem.com">Write us an email</a></div>
+   <div class="card mt1"><h3>Medical questions</h3><p class="mb0">We cannot give personal medical advice by message. To speak with a qualified practitioner, <a href="consult.html">request a consultation</a>. In an emergency, call your local emergency number.</p></div>
+  </div>
+ </div>
+</section>
+{% endraw %}
