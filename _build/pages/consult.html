@@ -1,0 +1,92 @@
+title: Find a practitioner: request a consultation
+description: Request a consultation with a qualified Unani, Ayurvedic, Chinese medicine or herbal practitioner, in person or by video. Free, no obligation.
+---
+<section class="page-hero">
+ <div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="{{root}}index.html">Home</a> / Find a practitioner</nav>
+  <h1>Find a practitioner</h1>
+  <p class="lead">Three short steps, about a minute. Tell us what you need and how you would like to be seen, and we reply within two working days with next steps and, where available, introductions to suitable practitioners.</p>
+ </div>
+</section>
+<section style="padding-top:34px">
+ <div class="wrap split">
+  <div class="form-card">
+   <form class="js-form multistep" data-subject="Consultation request" data-ok="Request received. We reply within two working days, usually sooner.">
+    <div class="steps-ind" aria-hidden="true"><span class="on"></span><span></span><span></span></div>
+
+    <div class="step active">
+     <p class="step-head">Step 1 of 3: what you need</p>
+     <div class="field"><label for="c-concern">What would you like help with?</label>
+      <select id="c-concern" name="concern" required data-prefill="concern"><option value="">Choose one</option>{{block:concern_options}}<option>Medicine review</option><option>Temperament assessment</option><option>Weight management</option><option>Men's health</option><option>General wellbeing</option><option>Something else</option></select></div>
+     <div class="field"><label for="c-herb">Herb or remedy you are asking about (optional)</label><input id="c-herb" name="herb" data-prefill="herb" placeholder="e.g. black seed, joshanda"></div>
+     <fieldset class="field" style="border:0;padding:0;margin:0 0 16px"><legend style="font-weight:600;font-size:.95rem;margin-bottom:8px">Preferred tradition</legend>
+      <div class="choice-grid">
+       <label class="choice"><input type="radio" name="tradition" value="Unani (Tibb)" required><span>Unani (Tibb)</span></label>
+       <label class="choice"><input type="radio" name="tradition" value="Ayurveda"><span>Ayurveda</span></label>
+       <label class="choice"><input type="radio" name="tradition" value="Chinese medicine or acupuncture"><span>Chinese medicine or acupuncture</span></label>
+       <label class="choice"><input type="radio" name="tradition" value="Western herbalism or naturopathy"><span>Western herbalism or naturopathy</span></label>
+       <label class="choice"><input type="radio" name="tradition" value="Not sure"><span>Not sure, recommend one</span></label>
+       <label class="choice"><input type="radio" name="tradition" value="Integrative doctor"><span>A doctor who uses herbs</span></label>
+      </div>
+     </fieldset>
+     <fieldset class="field" style="border:0;padding:0;margin:0 0 16px"><legend style="font-weight:600;font-size:.95rem;margin-bottom:8px">How would you like to be seen?</legend>
+      <div class="choice-grid">
+       <label class="choice"><input type="radio" name="format" value="In person" required><span>In person</span></label>
+       <label class="choice"><input type="radio" name="format" value="Video call"><span>Video call</span></label>
+       <label class="choice"><input type="radio" name="format" value="Either"><span>Either is fine</span></label>
+      </div>
+     </fieldset>
+     <div class="field"><label for="c-loc">City and country</label><input id="c-loc" name="location" required autocomplete="address-level2" placeholder="e.g. Hyderabad, India"></div>
+     <div class="step-nav"><span></span><button class="btn btn-ink" type="button" data-next>Continue</button></div>
+    </div>
+
+    <div class="step">
+     <p class="step-head">Step 2 of 3: a little context</p>
+     <div class="field"><label for="c-when">When would you like to be seen?</label>
+      <select id="c-when" name="timing" required><option value="">Choose one</option><option>This week</option><option>This month</option><option>No rush, I am researching</option></select></div>
+     <div class="field"><label for="c-meds">Do you take any prescription medicines?</label>
+      <select id="c-meds" name="prescription_medicines" required><option value="">Choose one</option><option>Yes</option><option>No</option><option>Not sure</option></select>
+      <div class="hint">This helps a practitioner check for interactions. You do not need to name them here.</div></div>
+     <div class="field"><label for="c-budget">Budget per session (optional)</label>
+      <select id="c-budget" name="budget"><option>Not sure</option><option>Under US$25</option><option>US$25 to 60</option><option>US$60 to 120</option><option>Over US$120</option></select></div>
+     <div class="field"><label for="c-note">Anything else we should know? (optional)</label><textarea id="c-note" name="note" maxlength="300" placeholder="Keep it brief. Please do not include detailed medical records."></textarea></div>
+     <div class="step-nav"><button class="btn btn-line" type="button" data-prev>Back</button><button class="btn btn-ink" type="button" data-next>Continue</button></div>
+    </div>
+
+    <div class="step">
+     <p class="step-head">Step 3 of 3: where we should reply</p>
+     <div class="row">
+      <div class="field"><label for="c-name">First name</label><input id="c-name" name="name" required autocomplete="given-name"></div>
+      <div class="field"><label for="c-email">Email</label><input id="c-email" name="email" type="email" required autocomplete="email"></div>
+     </div>
+     <div class="row">
+      <div class="field"><label for="c-phone">Phone or WhatsApp (optional)</label><input id="c-phone" name="phone" type="tel" autocomplete="tel"></div>
+      <div class="field"><label for="c-pref">Best way to reach you</label><select id="c-pref" name="contact_preference"><option>Email</option><option>Phone call</option><option>WhatsApp</option></select></div>
+     </div>
+     <input class="hp" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+     <div class="field"><label class="check"><input type="checkbox" name="consent_share" value="yes" required> <span>Share my request with up to three suitable practitioners. I have read the <a href="{{root}}privacy.html">privacy policy</a>.</span></label></div>
+     <div class="field"><label class="check"><input type="checkbox" name="newsletter" value="yes"> <span>Send me Herb of the Week (optional).</span></label></div>
+     <div class="step-nav"><button class="btn btn-line" type="button" data-prev>Back</button><button class="btn btn-primary" type="submit">Send my request</button></div>
+    </div>
+    <div class="form-msg" role="status"></div>
+    <div class="trust-row"><span>Free to ask</span><span>No obligation</span><span>Reply within two working days</span></div>
+   </form>
+  </div>
+  <div>
+   <h2 class="mt0">What happens next</h2>
+   <ol class="prose" style="padding-left:1.2em">
+    <li>We read your request and check which practitioners in our network fit your tradition, location and format.</li>
+    <li>We email you with next steps, usually within one working day, and introduce you to up to three practitioners where available.</li>
+    <li>You choose whether to book. Fees are agreed directly with the practitioner.</li>
+   </ol>
+   <h3>Our standards for practitioners</h3>
+   <ul>
+    <li>Where a country regulates the profession, practitioners must show current registration, for example with India's National Commission for Indian System of Medicine or Pakistan's National Council for Tibb.</li>
+    <li>They agree never to advise stopping prescribed medicines and never to claim cures.</li>
+    <li>Paid placements are always labelled as sponsored.</li>
+   </ul>
+   <div class="caution"><h3>Not for emergencies</h3><p class="mb0">If you have chest pain, difficulty breathing, severe bleeding, thoughts of harming yourself or any other emergency, call your local emergency number now.</p></div>
+   <p class="small muted">Are you a practitioner? <a href="{{root}}practitioners.html">Apply to join the directory</a>.</p>
+  </div>
+ </div>
+</section>

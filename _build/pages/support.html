@@ -1,0 +1,69 @@
+title: Support Hakeem.com
+description: Help keep Hakeem.com free and independent. One-time or monthly contributions fund source checks, safety reviews, translations, outreach, hiring and contest prizes.
+---
+<section class="page-hero">
+ <div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="{{root}}index.html">Home</a> / Support</nav>
+  <h1>Keep good herbal information free</h1>
+  <p class="lead">Hakeem.com has no paywall and does not sell supplements. Reader support pays for the slow work: checking every claim against its source, updating safety notes, translating, and reaching people who would otherwise rely on rumour.</p>
+ </div>
+</section>
+<section style="padding-top:34px">
+ <div class="wrap split">
+  <div class="form-card" id="donate">
+   <h2 class="mt0">Choose your support</h2>
+   <div class="toggle" role="group" aria-label="Frequency">
+    <button type="button" data-freq="once" aria-pressed="true">One-time</button>
+    <button type="button" data-freq="monthly" aria-pressed="false">Monthly</button>
+   </div>
+   <form class="js-form" data-subject="Support pledge" data-ok="Thank you. We will email you a secure payment link within one working day.">
+    <div class="amounts" id="amounts"></div>
+    <div class="row">
+     <div class="field"><label for="amtInput">Amount (US$)</label><input id="amtInput" name="amount" type="number" min="1" step="1" value="25" required></div>
+     <div class="field"><label for="d-fund">Where should it go?</label>
+      <select id="d-fund" name="fund" data-prefill="fund"><option>Where it is needed most</option><option>Running costs: hosting, tools and research access</option><option>Source checks and safety reviews</option><option>Promotion and outreach</option><option>Hiring reviewers, writers and translators</option><option>Contest prize pool</option></select></div>
+    </div>
+    <p class="impact" id="impact" aria-live="polite"></p>
+    <input type="hidden" name="frequency" id="freqInput" value="One-time">
+    <div class="row">
+     <div class="field"><label for="d-name">Name</label><input id="d-name" name="name" required autocomplete="name"></div>
+     <div class="field"><label for="d-email">Email</label><input id="d-email" name="email" type="email" required autocomplete="email"></div>
+    </div>
+    <div class="field"><label for="d-msg">Message (optional)</label><textarea id="d-msg" name="message" maxlength="200" placeholder="Say why you support us, if you like"></textarea></div>
+    <input class="hp" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <div class="field"><label class="check"><input type="checkbox" name="supporter_wall" value="yes"> <span>Show my name on the supporters wall.</span></label></div>
+    <div class="field"><label class="check"><input type="checkbox" name="payment_method_card" value="Card, PayPal or UPI"> <span>I would like to pay by card, PayPal or UPI (we include all options in the link).</span></label></div>
+    <button class="btn btn-primary" type="submit">Pledge <span id="donSummary">$25 one-time</span></button>
+    <div class="form-msg" role="status"></div>
+    <p class="hint">We send a secure payment link by email; we never ask for card details on this page. Hakeem.com is not a registered charity, so contributions are not tax-deductible.</p>
+   </form>
+  </div>
+  <div>
+   <h2 class="mt0">Where support goes</h2>
+   <p>Our planned allocation of reader support for the year ahead:</p>
+   <div class="field"><b>Running costs</b><span class="muted"> 30%</span><div class="fund-bar"><i style="width:30%"></i></div></div>
+   <div class="field"><b>Source checks and safety reviews</b><span class="muted"> 25%</span><div class="fund-bar"><i style="width:25%"></i></div></div>
+   <div class="field"><b>Hiring reviewers, writers and translators</b><span class="muted"> 20%</span><div class="fund-bar"><i style="width:20%"></i></div></div>
+   <div class="field"><b>Promotion and outreach</b><span class="muted"> 15%</span><div class="fund-bar"><i style="width:15%"></i></div></div>
+   <div class="field"><b>Contests and prizes</b><span class="muted"> 10%</span><div class="fund-bar"><i style="width:10%"></i></div></div>
+   <p class="small muted">We publish a yearly summary of what came in and where it went.</p>
+   <h3 class="mt2">Monthly supporter tiers</h3>
+   <ul class="plain-list">
+    <li><b>Seed, $5 a month.</b> Supporters wall and a monthly note on what your support made possible.</li>
+    <li><b>Sprout, $15 a month.</b> Plus early access to contests and a vote on which herbs we review next.</li>
+    <li><b>Grove, $50 a month.</b> Plus a "supported by" credit on one herb profile and a yearly call with the editors.</li>
+   </ul>
+  </div>
+ </div>
+</section>
+<section class="band">
+ <div class="wrap">
+  <div class="section-head"><div><h2>Other ways to help</h2></div></div>
+  <div class="grid g4">
+   <div class="card"><h3>Sponsor a contest</h3><p class="muted">Fund prizes for a season's photo or story contest, with your name on the contest page.</p><a href="{{root}}advertise.html#contests">Sponsor prizes</a></div>
+   <div class="card"><h3>Adopt a herb</h3><p class="muted">Fund the upkeep of one herb profile for a year, with a credit line and no editorial influence.</p><a href="{{root}}advertise.html#adopt">Adopt a herb</a></div>
+   <div class="card"><h3>Volunteer</h3><p class="muted">Translate, proofread or photograph medicinal plants in your region.</p><a href="{{root}}careers.html?role=Volunteer">Volunteer with us</a></div>
+   <div class="card"><h3>Share it</h3><p class="muted">Send the interaction checker to someone who takes herbs with their medicines.</p><a href="{{root}}interactions.html">Open the checker</a></div>
+  </div>
+ </div>
+</section>
