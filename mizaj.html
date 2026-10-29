@@ -1,0 +1,102 @@
+---
+layout: default
+v_root: ''
+v_t: 'Mizaj quiz: find your Unani temperament | Hakeem.com'
+v_d: 'Twelve questions place you on the classical Unani map of temperaments (hot or cold, dry or moist), with traditional lifestyle guidance and clear limits.'
+v_c: 'https://hakeem.com/mizaj.html'
+v_ogt: 'website'
+v_ld: ''
+v_cls: ''
+---
+{% raw %}<section class="page-hero">
+ <div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> / Mizaj quiz</nav>
+  <h1>What is your mizaj?</h1>
+  <p class="lead">In Unani medicine every person has a temperament, or mizaj: a balance of hot and cold, dry and moist. Answer twelve questions about your natural tendencies, not how you feel today. It takes about two minutes.</p>
+ </div>
+</section>
+<section style="padding-top:34px">
+ <div class="wrap">
+  <div class="quiz" id="quiz">
+   <div class="quiz-progress"><i></i></div>
+   <div id="quizQs"></div>
+   <button class="btn btn-line btn-small" type="button" id="quizBack" hidden>Previous question</button>
+  </div>
+
+  <div id="quizResult" hidden>
+   <div class="result-card">
+    <div class="tmap" style="padding:12px"><svg viewBox="0 0 520 520" role="img" aria-label="Temperament map: herbs placed from cold to hot and from moist to dry"><rect x="54.0" y="54.0" width="206.0" height="206.0" rx="6" style="fill:var(--q-saudawi);opacity:.09"/><rect x="260.0" y="54.0" width="206.0" height="206.0" rx="6" style="fill:var(--q-safrawi);opacity:.09"/><rect x="54.0" y="260.0" width="206.0" height="206.0" rx="6" style="fill:var(--q-balghami);opacity:.09"/><rect x="260.0" y="260.0" width="206.0" height="206.0" rx="6" style="fill:var(--q-damwi);opacity:.09"/><line class="axis" x1="54" y1="260" x2="466" y2="260"/><line class="axis" x1="260" y1="54" x2="260" y2="466"/><text class="axis-label" x="518" y="264" text-anchor="end">Hot</text><text class="axis-label" x="2" y="264">Cold</text><text class="axis-label" x="260" y="44" text-anchor="middle">Dry</text><text class="axis-label" x="260" y="488" text-anchor="middle">Moist</text><text class="q-label" x="54" y="18" text-anchor="start">Saudawi</text><text class="q-sub" x="54" y="38" text-anchor="start">سوداوي</text><text class="q-label" x="466" y="18" text-anchor="end">Safrawi</text><text class="q-sub" x="466" y="38" text-anchor="end">صفراوي</text><text class="q-label" x="54" y="488" text-anchor="start">Balghami</text><text class="q-sub" x="54" y="508" text-anchor="start">بلغمي</text><text class="q-label" x="466" y="488" text-anchor="end">Damwi</text><text class="q-sub" x="466" y="508" text-anchor="end">دموي</text><g class="you" id="rMarker" transform="translate(260.0 260.0)"><circle r="13" style="fill:none;stroke:var(--ink);stroke-width:3"/><circle r="5" style="fill:var(--ink)"/><text x="18" y="5" style="font:700 14px var(--sans);fill:var(--ink)">You</text></g></svg></div>
+    <div>
+     <p class="muted mb0">Your temperament in Unani terms</p>
+     <h2 class="result-name"><span id="rName"></span> <span class="result-ar" id="rAr" dir="rtl" lang="ar"></span></h2>
+     <p><b id="rQual"></b></p>
+     <p id="rTraits"></p>
+     <p class="muted" id="rTend"></p>
+     <h3>Traditional ways to keep your balance</h3>
+     <p class="small muted">Unani organises daily habits into six essentials. These are traditional suggestions for healthy people, not treatment.</p>
+     <ul id="rTips"></ul>
+     <h3>Herbs traditionally used to balance this temperament</h3>
+     <p class="small muted">Tradition only. Open each profile for its evidence grade and safety notes before trying anything.</p>
+     <div class="pill-row" id="rHerbs"></div>
+     <div class="caution"><h3>When to see a doctor instead</h3><ul><li>Chest pain, breathlessness, fainting or sudden weakness</li><li>Low mood lasting more than two weeks, or thoughts of harming yourself</li><li>Unexplained weight loss, fever or bleeding</li><li>Pregnancy, or any long-term condition you take medicine for</li></ul></div>
+     <p><button class="btn btn-line btn-small" type="button" id="quizAgain">Take the quiz again</button> <a class="btn btn-primary btn-small" href="consult.html?concern=Temperament+assessment">Ask a practitioner to assess you</a></p>
+    </div>
+   </div>
+
+   <div class="split mt2">
+    <div class="form-card">
+     <h3>Email me my result</h3>
+     <p class="small muted">Optional. Your full result is already on screen. We email a copy with a printable six-essentials chart.</p>
+     <form class="js-form" data-subject="Mizaj quiz result" data-ok="Sent. Check your inbox in the next few minutes.">
+      <input type="hidden" name="result" id="rField">
+      <div class="row">
+       <div class="field"><label for="mq-name">First name (optional)</label><input id="mq-name" name="name" autocomplete="given-name"></div>
+       <div class="field"><label for="mq-email">Email</label><input id="mq-email" name="email" type="email" required autocomplete="email"></div>
+      </div>
+      <input class="hp" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="field"><label class="check"><input type="checkbox" name="send_result" value="yes" required> <span>Send my result to this address.</span></label></div>
+      <div class="field"><label class="check"><input type="checkbox" name="newsletter" value="yes"> <span>Also send me Herb of the Week (optional).</span></label></div>
+      <div class="field"><label class="check"><input type="checkbox" name="practitioner_contact" value="yes"> <span>A practitioner may contact me about a personal assessment (optional).</span></label></div>
+      <button class="btn btn-primary" type="submit">Email my result</button>
+      <div class="form-msg" role="status"></div>
+     </form>
+    </div>
+    <div>
+     <h3>What this quiz can and cannot tell you</h3>
+     <p>The questions are adapted from the classical "ten signs" (<i>ajnas-e-ashra</i>) that Unani practitioners use, such as build, response to heat and cold, sleep and emotional style. Your answers are scored on two axes, hot to cold and dry to moist, and plotted on the same map we use for herbs.</p>
+     <p>Temperament is a traditional framework, not a validated medical test. It cannot diagnose disease, and modern research has not shown that temperament predicts health outcomes. We do not store your answers.</p>
+     <p><a href="learn/four-temperaments-explained.html">Read the full guide to the four temperaments</a></p>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+<script type="application/json" id="quizData">
+{"questions":[
+ {"q":"How would you describe your build?","o":[["Lean and wiry; I find it hard to gain weight",0,2],["Firm and muscular",2,0],["Soft and full; I gain weight easily",-1,-2],["Somewhere in the middle",0,0]]},
+ {"q":"How does your skin usually feel to the touch?","o":[["Warm",2,0],["Cool",-2,0],["Soft and slightly moist",0,-2],["Dry or rough",0,2]]},
+ {"q":"Which best describes your hair?","o":[["Thick and fast-growing",2,1],["Fine and soft",-1,-1],["Coarse or curly",1,2],["Dry or thinning",-1,2]]},
+ {"q":"Which weather bothers you most?","o":[["Heat; I prefer cool rooms",2,0],["Cold; I prefer warmth",-2,0],["Damp, humid days",0,-2],["Dry wind and dry air",0,2]]},
+ {"q":"How do you usually sleep?","o":[["Lightly; I wake easily",1,1],["Deeply and long; I am hard to wake",-1,-2],["I lie awake thinking or worrying",-1,2],["Well, and wake refreshed",1,-1]]},
+ {"q":"How is your appetite and digestion?","o":[["Strong; I get irritable if I skip a meal",2,1],["Steady; I digest well",1,-1],["Slow; food sits heavy",-2,-1],["Irregular; prone to wind or dryness",-1,2]]},
+ {"q":"How often are you thirsty?","o":[["Often",1,2],["Rarely",-1,-2],["About average",0,0]]},
+ {"q":"How easily do you sweat?","o":[["Easily",1,-1],["Rarely",-1,1],["About average",0,0]]},
+ {"q":"Day to day, you are usually…","o":[["Quick and energetic",2,1],["Sociable and cheerful",1,-2],["Calm and slow to start",-2,-1],["Thoughtful and cautious",-1,2]]},
+ {"q":"Under stress, you tend to…","o":[["Get angry quickly, then cool down",2,1],["Worry and overthink",-1,2],["Stay calm or withdraw",-2,-1],["Stay upbeat and talk it out",1,-2]]},
+ {"q":"How would friends describe the way you speak?","o":[["Fast and forceful",2,1],["Warm and easy-going",1,-1],["Soft and slow",-1,-1],["Precise, with few words",-1,1]]},
+ {"q":"Left to yourself, what do you reach for?","o":[["Cold drinks and cooling foods",2,0],["Hot drinks and warm, cooked meals",-2,0],["Soups and juicy fruit",0,2],["Light, dry snacks",0,-2]]}
+],
+"results":{
+ "safrawi":{"name":"Safrawi","ar":"صفراوي","qual":"Hot and dry, the choleric temperament","traits":"Classical texts describe this temperament as quick, decisive and energetic, with a lean or wiry build, warm skin, a strong appetite and thirst, and light sleep.","tend":"Tradition links too much heat and dryness to irritability, acidity and heartburn, headaches in hot weather, and dry skin.","tips":[["Air","Favour cool, well-ventilated spaces and avoid the midday sun"],["Food and drink","Cooling, moistening foods such as cucumber, melon, yoghurt and barley water; go easy on chilli, fried food and strong coffee"],["Movement and rest","Moderate exercise in the cooler parts of the day rather than exhausting sessions"],["Sleep","Keep a regular bedtime in a cool room"],["Retention and elimination","Drink enough water; dryness and constipation often go together"],["Emotions","Build in time to cool down after conflict; anger is the classic aggravator"]],"herbs":[["psyllium","Psyllium"],["coriander","Coriander"],["amla","Amla"]]},
+ "damwi":{"name":"Damwi","ar":"دموي","qual":"Hot and moist, the sanguine temperament","traits":"Classical texts describe this temperament as sociable, cheerful and generous, with a well-built frame, good appetite and sound sleep.","tend":"Tradition links excess to feeling heavy and flushed, skin eruptions and a sense of fullness, especially in spring.","tips":[["Air","Plenty of fresh air; avoid stuffy, overheated rooms"],["Food and drink","Lighter meals with more vegetables and sour fruits; less rich meat, sweets and alcohol"],["Movement and rest","Regular, vigorous exercise"],["Sleep","Avoid oversleeping and heavy late meals"],["Retention and elimination","Keep a regular daily routine"],["Emotions","Balance a busy social life with quiet time"]],"herbs":[["coriander","Coriander"],["amla","Amla"]]},
+ "balghami":{"name":"Balghami","ar":"بلغمي","qual":"Cold and moist, the phlegmatic temperament","traits":"Classical texts describe this temperament as calm, steady and patient, with a soft build, cool skin, deep sleep and slower digestion.","tend":"Tradition links excess to congestion, sluggish digestion, weight gain, feeling the cold and low motivation.","tips":[["Air","Warm, dry rooms; avoid damp places"],["Food and drink","Warm, cooked, lightly spiced food with ginger and black pepper; fewer cold drinks and heavy sweets"],["Movement and rest","Brisk daily activity that gets you warm"],["Sleep","Rise early and avoid long daytime naps"],["Retention and elimination","Exercise enough to sweat; steam inhalation is a traditional aid"],["Emotions","Seek new challenges and company to stay engaged"]],"herbs":[["ginger","Ginger"],["black-seed","Black seed"],["cinnamon","Cinnamon"],["fennel","Fennel"],["clove","Clove"]]},
+ "saudawi":{"name":"Saudawi","ar":"سوداوي","qual":"Cold and dry, the melancholic temperament","traits":"Classical texts describe this temperament as thoughtful, careful and reflective, with a lean build, dry skin, cold hands and feet, and a mind that is busy at night.","tend":"Tradition links excess to low mood and worry, dry skin, constipation and joint stiffness.","tips":[["Air","Warmth, sunlight and gentle humidity"],["Food and drink","Warm, moist, nourishing food such as soups, stews, olive oil or ghee, soaked almonds and warm milk; less very dry or salty food"],["Movement and rest","Gentle, regular exercise such as walking, plus oil massage (dalak)"],["Sleep","A wind-down routine without screens"],["Retention and elimination","Water and fibre every day"],["Emotions","Company, music and time in nature; seek help if low mood persists"]],"herbs":[["almond","Almond"],["licorice","Licorice"],["saffron","Saffron"],["chamomile","Chamomile"]]},
+ "mutadil":{"name":"Mu'tadil","ar":"معتدل","qual":"Balanced temperament","traits":"Your answers sit close to the centre of the map. Classical texts treat balance as the ideal: moderate build, appetite, sleep and mood.","tend":"For a balanced temperament, tradition focuses on keeping balance through the seasons rather than correcting it.","tips":[["Air","Adapt to the season: cooler spaces in summer, warmth in winter"],["Food and drink","Moderate, varied meals; lighter food in summer, warmer food in winter"],["Movement and rest","Regular exercise you enjoy"],["Sleep","A consistent schedule"],["Retention and elimination","Water, fibre and a regular routine"],["Emotions","Keep the habits that keep you steady"]],"herbs":[["ginger","Ginger"],["fennel","Fennel"],["coriander","Coriander"]]}
+}}
+</script>
+<script>
+(function(){var d=JSON.parse(document.getElementById('quizData').textContent),w=document.getElementById('quizQs'),h='';
+d.questions.forEach(function(q,i){h+='<div class="quiz-q'+(i?'':' active')+'"><p class="step-head">Question '+(i+1)+' of '+d.questions.length+'</p><h2>'+q.q+'</h2><div class="quiz-opts">'+q.o.map(function(o,j){return '<button type="button" data-o="'+j+'">'+o[0]+'</button>'}).join('')+'</div></div>'});
+w.innerHTML=h;})();
+</script>
+{% endraw %}
