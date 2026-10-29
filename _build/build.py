@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
 """Static site generator for Hakeem.com.
 
-Usage:  python3 _build/build.py
-Writes plain HTML into the repository root (the Publish workflow then pushes the
-result to the gh-pages branch). All internal links are relative, so the same
-output works at https://webworksa1.github.io/hakeem-com/ and at https://hakeem.com/.
+Usage:
+  python3 _build/build.py              writes the Jekyll source tree into the repository
+                                       root; GitHub Pages builds it from the main branch.
+  python3 _build/build.py --html DIR   writes the finished HTML site into DIR instead
+                                       (for local preview and for checking the Jekyll output).
+
+Edit the data (herbs.py, extras.py) or a page body in pages/, run the script, commit the
+result. All internal links are relative, so the output works on any host or path.
 """
 import html, json, os, re, sys, datetime
 from urllib.parse import quote_plus
@@ -210,15 +214,10 @@ def grade_scale():
     return "".join(out)
 
 
-_NL = [0]
-
-
-def newsletter_form(root, compact=False):
-    _NL[0] += 1
-    n = _NL[0]
+def newsletter_form(n):
     return ('<form class="js-form" data-subject="Newsletter signup" data-ok="You are on the list. Herb of the Week arrives on Sundays.">'
-            '<div class="foot-news"><label class="sr-only" for="nl-%d">Email address</label>'
-            '<input id="nl-%d" name="email" type="email" required placeholder="Your email" autocomplete="email">'
+            '<div class="foot-news"><label class="sr-only" for="nl-%s">Email address</label>'
+            '<input id="nl-%s" name="email" type="email" required placeholder="Your email" autocomplete="email">'
             '<input type="hidden" name="list" value="Herb of the Week">'
             '<input class="hp" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">'
             '<button class="btn btn-primary btn-small" type="submit">Subscribe</button></div>'
@@ -280,24 +279,51 @@ def breadcrumb_ld(trail):
         {"@type": "ListItem", "position": i + 1, "name": n, "item": SITE_URL + "/" + p} for i, (n, p) in enumerate(trail)]}
 
 
-def layout(path, title, desc, body, ld=None, ogtype="website", cls=""):
-    root = rel_root(path)
-    full_title = title if title.endswith(SITE_NAME) else "%s | %s" % (title, SITE_NAME)
-    ads = "" if path in NO_ADS else (
-        '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=%s" crossorigin="anonymous"></script>' % ADSENSE_CLIENT)
+ADS_TAG = ('<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=%s" '
+           'crossorigin="anonymous"></script>' % ADSENSE_CLIENT)
+PAGES = []  # every page: path, layout name, front-matter values, content
+
+
+def nav_html(root):
     nav = "".join('<li><a href="%s%s">%s</a></li>' % (root, href, label) for href, label in NAV)
-    nav += '<li class="menu-cta"><a href="%scontests.html">Contests</a></li><li class="menu-cta"><a class="btn btn-primary" href="%sconsult.html">Find a practitioner</a></li>' % (root, root)
-    lds = "".join(jsonld(x) for x in (ld or []))
-    page = TEMPLATE.format(
-        root=root, title=e(full_title), desc=e(desc), canonical=canonical(path), ogtype=ogtype, fonts=FONTS,
-        ver=VERSION, ads=ads, ld=lds, cls=cls, nav=nav, body=body, year=datetime.date.today().year,
-        newsletter=newsletter_form(root + "f"), client=ADSENSE_CLIENT, ogimg=SITE_URL + "/assets/img/og.png",
-        base=BASE_SCRIPT if path == "404.html" else "")
-    out = os.path.join(ROOT, path)
-    os.makedirs(os.path.dirname(out), exist_ok=True)
-    with open(out, "w", encoding="utf-8") as fh:
-        fh.write(page)
+    return nav + ('<li class="menu-cta"><a href="%scontests.html">Contests</a></li><li class="menu-cta">'
+                  '<a class="btn btn-primary" href="%sconsult.html">Find a practitioner</a></li>' % (root, root))
+
+
+def png_tags(root):
+    # Share image and touch icon are PNGs rendered by make_images.py; tags appear only when the files exist.
+    return ('\n<meta property="og:image" content="%s/assets/img/og.png">\n<meta name="twitter:card" content="summary_large_image">'
+            '\n<link rel="apple-touch-icon" href="%sassets/img/icon-192.png">' % (SITE_URL, root))
+
+
+def layout(path, title, desc, body, ld=None, ogtype="website", cls="", kind="default", fields=None):
+    """Register a page. body is the page content (for herb and hub pages, fields fill the layout instead)."""
+    full_title = title if title.endswith(SITE_NAME) else "%s | %s" % (title, SITE_NAME)
+    PAGES.append({"path": path, "kind": kind, "content": body, "fields": fields or {},
+                  "base": {"v_root": rel_root(path), "v_t": e(full_title), "v_d": e(desc), "v_c": canonical(path),
+                           "v_ogt": ogtype, "v_ld": "".join(jsonld(x) for x in (ld or [])), "v_cls": cls},
+                  "noads": path in NO_ADS, "is404": path == "404.html"})
     OUT.append((path, title, desc))
+
+
+def render_html(pg, has_png):
+    """The finished page, exactly as GitHub Pages renders it from the Jekyll tree."""
+    b, f = pg["base"], pg["fields"]
+    if pg["kind"] == "herb":
+        body = HERB_TPL.format(root="../", reviewed=REVIEWED, ad1=ad_slot("herb-mid"), ad2=ad_slot("herb-end"),
+                               related="".join(TILES[s] for s in f["rel"]), **{k: v for k, v in f.items() if k != "rel"})
+    elif pg["kind"] == "hub":
+        body = HUB_TPL.format(root="../", ad=ad_slot("hub-mid"), **f)
+    elif pg["kind"] == "guide":
+        body = GUIDE_TPL.format(root="../", reviewed=REVIEWED, body=pg["content"], **f)
+    else:
+        body = pg["content"]
+    root = b["v_root"]
+    return TEMPLATE.format(
+        root=root, title=b["v_t"], desc=b["v_d"], canonical=b["v_c"], ogtype=b["v_ogt"], fonts=FONTS,
+        ver=VERSION, ads="" if pg["noads"] else ADS_TAG, ld=b["v_ld"], cls=b["v_cls"], nav=nav_html(root), body=body,
+        year=datetime.date.today().year, newsletter=newsletter_form("f"), client=ADSENSE_CLIENT,
+        png=png_tags(root) if has_png else "", base=BASE_SCRIPT if pg["is404"] else "")
 
 
 # 404.html is served for missing paths at any depth, so it resolves links from the site root at runtime.
@@ -316,13 +342,10 @@ TEMPLATE = """<!doctype html>
 <meta property="og:site_name" content="Hakeem.com">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
-<meta property="og:url" content="{canonical}">
-<meta property="og:image" content="{ogimg}">
-<meta name="twitter:card" content="summary_large_image">
+<meta property="og:url" content="{canonical}">{png}
 <meta name="theme-color" content="#1F2A44">
 <meta name="google-adsense-account" content="{client}">
 <link rel="icon" href="{root}assets/img/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="{root}assets/img/icon-192.png">
 <link rel="manifest" href="{root}site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -426,9 +449,26 @@ def herb_page(h):
     refs_html = "".join('<li><a href="%s" rel="noopener" target="_blank">%s</a></li>' % (e(u), e(t)) for t, u in refs)
     refs_html += '<li>Hakeem.com editorial review of traditional Unani and Ayurvedic sources and the references above.</li>'
     related = [x for x in HERBS if x["slug"] != h["slug"] and set(HERB_TAGS.get(x["slug"], [])) & set(HERB_TAGS.get(h["slug"], []))][:4]
-    rel_html = "".join(label_tile(x, root) for x in related)
     hub_links = ", ".join('<a href="%sconcerns/%s.html">%s</a>' % (root, s, e(HUB_BY_SLUG[s]["title"])) for s in HERB_TAGS.get(h["slug"], []))
-    body = """
+    fields = dict(name=e(h["name"]), name_l=e(h["name"].split(" (")[0].lower() if not h["name"].startswith("St.") else h["name"]),
+                  name_q=quote_plus(h["name"]), latin=e(h["latin"]), names=names, family=e(h["family"]), parts=e(h["parts"]),
+                  forms=e(h["forms"]), trads=e(", ".join(h["traditions"])), best=grade_html(best_grade(h)),
+                  hubs=('<dt>Concerns</dt><dd>%s</dd>' % hub_links) if hub_links else "", mini=mini,
+                  summary=e(h["summary"]), verdict=e(h["verdict"]), uses=uses, research=e(h["research"]), safety=safety,
+                  avoid=avoid, ix=ix, slug=h["slug"], trad=trad, confuse=e(h["confuse"]), buying=e(h["buying"]),
+                  refs=refs_html, rel=[x["slug"] for x in related])
+    ld = [{
+        "@context": "https://schema.org", "@type": "MedicalWebPage", "name": "%s (%s): uses, evidence and safety" % (h["name"], h["latin"]),
+        "url": canonical(path), "lastReviewed": REVIEWED_ISO, "inLanguage": "en", "audience": {"@type": "Patient"},
+        "about": {"@type": "DietarySupplement", "name": h["name"], "alternateName": [n[2] for n in h["names"] if n[2]],
+                  "nonProprietaryName": h["latin"]},
+        "publisher": {"@type": "Organization", "name": SITE_NAME, "url": SITE_URL}},
+        breadcrumb_ld([("Home", ""), ("Herb library", "herbs/"), (h["name"], path)])]
+    desc = "%s (%s): what the evidence says, safety, medicine interactions and traditional Unani and Ayurvedic use." % (h["name"], h["latin"])
+    layout(path, "%s: uses, evidence and safety" % h["name"], desc[:158], "", ld=ld, ogtype="article", kind="herb", fields=fields)
+
+
+HERB_TPL = """
 <article>
 <section class="page-hero" style="padding-bottom:36px">
  <div class="wrap">
@@ -500,22 +540,7 @@ def herb_page(h):
   <div class="labels">{related}</div>
  </div>
 </section>
-""".format(root=root, name=e(h["name"]), name_l=e(h["name"].split(" (")[0].lower() if not h["name"].startswith("St.") else h["name"]),
-           name_q=quote_plus(h["name"]), latin=e(h["latin"]), names=names, family=e(h["family"]), parts=e(h["parts"]),
-           forms=e(h["forms"]), trads=e(", ".join(h["traditions"])), best=grade_html(best_grade(h)),
-           hubs=('<dt>Concerns</dt><dd>%s</dd>' % hub_links) if hub_links else "", mini=mini, reviewed=REVIEWED,
-           summary=e(h["summary"]), verdict=e(h["verdict"]), uses=uses, research=e(h["research"]), safety=safety,
-           avoid=avoid, ix=ix, slug=h["slug"], trad=trad, confuse=e(h["confuse"]), buying=e(h["buying"]),
-           refs=refs_html, related=rel_html, ad1=ad_slot("herb-mid"), ad2=ad_slot("herb-end"))
-    ld = [{
-        "@context": "https://schema.org", "@type": "MedicalWebPage", "name": "%s (%s): uses, evidence and safety" % (h["name"], h["latin"]),
-        "url": canonical(path), "lastReviewed": REVIEWED_ISO, "inLanguage": "en", "audience": {"@type": "Patient"},
-        "about": {"@type": "DietarySupplement", "name": h["name"], "alternateName": [n[2] for n in h["names"] if n[2]],
-                  "nonProprietaryName": h["latin"]},
-        "publisher": {"@type": "Organization", "name": SITE_NAME, "url": SITE_URL}},
-        breadcrumb_ld([("Home", ""), ("Herb library", "herbs/"), (h["name"], path)])]
-    desc = "%s (%s): what the evidence says, safety, medicine interactions and traditional Unani and Ayurvedic use." % (h["name"], h["latin"])
-    layout(path, "%s: uses, evidence and safety" % h["name"], desc[:158], body, ld=ld, ogtype="article")
+"""
 
 
 HUB_BY_SLUG = {hb["slug"]: hb for hb in HUBS}
@@ -531,7 +556,13 @@ def hub_page(hb):
         rows.append('<tr><td><a href="%sherbs/%s.html"><b>%s</b></a><br><i class="muted">%s</i></td><td>%s</td><td>%s</td></tr>' % (
             root, slug, e(h["name"]), e(h["latin"]), grade_html(g), e(note)))
     red = "".join("<li>%s</li>" % e(x) for x in hb["redflags"])
-    body = """
+    fields = dict(title=e(hb["title"]), title_l=e(hb["title"].lower()), intro=e(hb["intro"]), rows="".join(rows), red=red,
+                  advice=e(hb["advice"]), slug=hb["slug"])
+    layout(path, "%s: herbs and the evidence" % hb["title"], hb["blurb"][:158], "",
+           ld=[breadcrumb_ld([("Home", ""), ("Health concerns", "concerns/"), (hb["title"], path)])], kind="hub", fields=fields)
+
+
+HUB_TPL = """
 <section class="page-hero"><div class="wrap">
  <nav class="crumbs" aria-label="Breadcrumb"><a href="{root}index.html">Home</a> / <a href="{root}concerns/">Health concerns</a> / {title}</nav>
  <h1>{title}</h1><p class="lead">{intro}</p></div></section>
@@ -546,10 +577,7 @@ def hub_page(hb):
  <p>Evidence grades describe the strongest use we found for each herb, as explained in <a href="{root}evidence-method.html">our method</a>. Open a herb page for its full safety profile before trying it.</p>
 </div><aside><div class="aside-sticky"><div class="aside-box"><h3>Want a personal plan?</h3><p class="small muted">A qualified practitioner can look at your history and medicines.</p><a class="btn btn-primary btn-small" href="{root}consult.html?concern={slug}">Request a consultation</a></div>
  <div class="aside-box"><h3>Check interactions</h3><p class="small muted">Taking prescription medicines? Check before you add any herb.</p><a href="{root}interactions.html">Open the checker</a></div></div></aside></div></section>
-""".format(root=root, title=e(hb["title"]), title_l=e(hb["title"].lower()), intro=e(hb["intro"]), rows="".join(rows), red=red,
-           advice=e(hb["advice"]), slug=hb["slug"], ad=ad_slot("hub-mid"))
-    layout(path, "%s: herbs and the evidence" % hb["title"], hb["blurb"][:158], body,
-           ld=[breadcrumb_ld([("Home", ""), ("Health concerns", "concerns/"), (hb["title"], path)])])
+"""
 
 
 # ---------------------------------------------------------------- blocks
@@ -569,7 +597,7 @@ def render_blocks(body, root, guides):
         "herb_options": herb_options,
         "concern_options": concern_options,
         "ix_tool": ix_tool,
-        "newsletter": lambda: newsletter_form(root + "b"),
+        "newsletter": lambda: newsletter_form("b"),
         "glossary": glossary_html,
         "az": lambda: az_bar(),
         "herb_count": lambda: str(len(HERBS)),
@@ -607,13 +635,18 @@ def glossary_html():
 
 
 # ---------------------------------------------------------------- guides
-def guide_wrap(meta, body, root, guides):
+def guide_fields(meta, body, root, guides):
     path = meta["path"]
     others = [g for g in guides if g["path"] != path][:4]
     other_html = "".join('<li><a href="%s%s">%s</a></li>' % (root, g["path"], e(g["short"])) for g in others)
     heads = re.findall(r'<h2 id="([^"]+)">([^<]+)</h2>', body)
     toc = "".join('<li><a href="#%s">%s</a></li>' % (a, t) for a, t in heads)
-    return """
+    return dict(cat=e(meta.get("category", "Guide")), title=e(meta["title"]), summary=e(meta["summary"]),
+                minutes=str(meta["minutes"]), others=other_html,
+                toc=('<div class="aside-box toc"><h3>On this page</h3><ol>%s</ol></div>' % toc) if toc else "")
+
+
+GUIDE_TPL = """
 <article>
 <section class="page-hero"><div class="wrap"><div style="max-width:780px">
  <nav class="crumbs" aria-label="Breadcrumb"><a href="{root}index.html">Home</a> / <a href="{root}learn/">Learn</a> / {cat}</nav>
@@ -631,20 +664,113 @@ def guide_wrap(meta, body, root, guides):
   <div class="aside-box"><h3>More guides</h3><ul class="plain-list" style="font-size:.97rem">{others}</ul></div>
  </div></aside>
 </div></section>
-</article>""".format(root=root, cat=e(meta.get("category", "Guide")), title=e(meta["title"]), summary=e(meta["summary"]),
-                     reviewed=REVIEWED, minutes=meta["minutes"], body=body, others=other_html,
-                     toc=('<div class="aside-box toc"><h3>On this page</h3><ol>%s</ol></div>' % toc) if toc else "")
+</article>"""
 
 
-# ---------------------------------------------------------------- extra files
-def write(path, content):
-    out = os.path.join(ROOT, path)
+# ---------------------------------------------------------------- output
+def write(base, path, content):
+    out = os.path.join(base, path)
     os.makedirs(os.path.dirname(out), exist_ok=True)
     with open(out, "w", encoding="utf-8") as fh:
         fh.write(content)
 
 
-def build():
+TILES = {}  # herb card HTML as used on herb pages (root "../"), shared through _data/tiles.yml
+
+# Liquid stand-ins used when turning the Python templates into Jekyll layouts.
+SPECIAL = {
+    "@content": "{{ content }}",
+    "@year": '{{ site.time | date: "%Y" }}',
+    "@ads": "{% unless page.v_noads %}" + ADS_TAG + "{% endunless %}",
+    "@base": "{% if page.v_base %}" + BASE_SCRIPT + "{% endif %}",
+    "@png": ('{% assign hk_png = site.static_files | where: "path", "/assets/img/og.png" | first %}{% if hk_png %}'
+             + png_tags("{{ page.v_root }}") + "{% endif %}"),
+    "@related": "{% for s in page.v_rel %}{{ site.data.tiles[s] }}{% endfor %}",
+}
+
+
+def S(key):
+    return "\x00%s\x00" % key
+
+
+def liquidize(text):
+    literal = re.sub(r"\x00[^\x00]+\x00", "", text)
+    if "{{" in literal or "{%" in literal:
+        raise SystemExit("Template text contains Liquid-like braces; escape them before building.")
+    return re.sub(r"\x00([^\x00]+)\x00", lambda m: SPECIAL.get(m.group(1)) or "{{ page.%s }}" % m.group(1), text)
+
+
+def yq(v):
+    """YAML single-quoted scalar: no backslash escapes, quotes doubled."""
+    if re.search("[\n\r\u0085  ﻿]", v):
+        raise SystemExit("Line break inside a front matter value: %r" % v[:60])
+    return "'" + v.replace("'", "''") + "'"
+
+
+def front_matter(d):
+    lines = ["---"]
+    for k, v in d.items():
+        if isinstance(v, bool):
+            lines.append("%s: %s" % (k, "true" if v else "false"))
+        elif isinstance(v, list):
+            lines.append("%s: [%s]" % (k, ", ".join(yq(x) for x in v)))
+        elif k == "layout":
+            lines.append("layout: %s" % v)
+        else:
+            lines.append("%s: %s" % (k, yq(v)))
+    lines.append("---")
+    return "\n".join(lines) + "\n"
+
+
+def raw(text):
+    if "{% endraw" in text:
+        raise SystemExit("Page body contains an endraw tag.")
+    return "{% raw %}" + text + "{% endraw %}"
+
+
+def jekyll_layouts():
+    default = TEMPLATE.format(
+        root=S("v_root"), title=S("v_t"), desc=S("v_d"), canonical=S("v_c"), ogtype=S("v_ogt"), fonts=FONTS, ver=VERSION,
+        ads=S("@ads"), ld=S("v_ld"), cls=S("v_cls"), nav=nav_html(S("v_root")), body=S("@content"), year=S("@year"),
+        newsletter=newsletter_form("f"), client=ADSENSE_CLIENT, png=S("@png"), base=S("@base"))
+    sub = "---\nlayout: default\n---\n"
+    herb_keys = ["name", "name_l", "name_q", "latin", "names", "family", "parts", "forms", "trads", "best", "hubs", "mini",
+                 "summary", "verdict", "uses", "research", "safety", "avoid", "ix", "slug", "trad", "confuse", "buying", "refs"]
+    herb = HERB_TPL.format(root="../", reviewed=REVIEWED, ad1=ad_slot("herb-mid"), ad2=ad_slot("herb-end"),
+                           related=S("@related"), **{k: S("v_" + k) for k in herb_keys})
+    hub = HUB_TPL.format(root="../", ad=ad_slot("hub-mid"),
+                         **{k: S("v_" + k) for k in ["title", "title_l", "intro", "rows", "red", "advice", "slug"]})
+    guide = GUIDE_TPL.format(root="../", reviewed=REVIEWED, body=S("@content"),
+                             **{k: S("v_" + k) for k in ["cat", "title", "summary", "minutes", "others", "toc"]})
+    return {"default": liquidize(default), "herb": sub + liquidize(herb), "hub": sub + liquidize(hub), "guide": sub + liquidize(guide)}
+
+
+def page_source(pg):
+    fm = {"layout": pg["kind"]}
+    fm.update(pg["base"])
+    if pg["noads"]:
+        fm["v_noads"] = True
+    if pg["is404"]:
+        fm["v_base"] = True
+    for k, v in pg["fields"].items():
+        fm["v_" + k] = v
+    body = raw(pg["content"]) if pg["kind"] in ("default", "guide") else ""
+    return front_matter(fm) + body
+
+
+CONFIG = """# GitHub Pages builds this site from the main branch with its built-in Jekyll.
+# The page files, layouts and data here are generated by _build/build.py:
+# edit _build/herbs.py, _build/extras.py or _build/pages/, run the script and commit the result.
+title: Hakeem.com
+url: https://hakeem.com
+exclude:
+  - README.md
+  - RESEARCH.md
+  - BUILD-PROMPTS.md
+"""
+
+
+def build(html_dir=None):
     pages = load_pages()
     guides = []
     for meta, body in pages:
@@ -653,14 +779,16 @@ def build():
             meta.setdefault("short", meta["title"])
             guides.append(meta)
     guides.sort(key=lambda m: int(m.get("order", 99)))
+    for h in HERBS:
+        TILES[h["slug"]] = label_tile(h, "../")
 
     for meta, body in pages:
         path = meta["path"]
         root = rel_root(path)
         b = render_blocks(body, root, guides)
-        ld = []
+        ld, kind, fields = [], "default", None
         if meta.get("kind") == "guide":
-            b = guide_wrap(meta, b, root, guides)
+            kind, fields = "guide", guide_fields(meta, b, root, guides)
             ld = [{"@context": "https://schema.org", "@type": "Article", "headline": meta["title"], "description": meta["summary"],
                    "dateModified": REVIEWED_ISO, "datePublished": REVIEWED_ISO, "author": {"@type": "Organization", "name": "Hakeem.com Editorial Team"},
                    "publisher": {"@type": "Organization", "name": SITE_NAME, "url": SITE_URL}, "mainEntityOfPage": canonical(path)},
@@ -673,18 +801,21 @@ def build():
                    "potentialAction": {"@type": "SearchAction", "target": SITE_URL + "/herbs/?q={search_term_string}",
                                        "query-input": "required name=search_term_string"}},
                   {"@context": "https://schema.org", "@type": "Organization", "name": SITE_NAME, "url": SITE_URL,
-                   "logo": SITE_URL + "/assets/img/icon-512.png"}]
-        layout(path, meta["title"], meta.get("description", meta.get("summary", "")), b, ld=ld, ogtype=ogtype, cls=meta.get("class", ""))
+                   "logo": SITE_URL + "/assets/img/favicon.svg"}]
+        layout(path, meta["title"], meta.get("description", meta.get("summary", "")), b, ld=ld, ogtype=ogtype,
+               cls=meta.get("class", ""), kind=kind, fields=fields)
 
     for h in HERBS:
         herb_page(h)
     for hb in HUBS:
         hub_page(hb)
 
+    base = html_dir or ROOT
+    files = {}
     # interaction data for the checker
     ixd = {"herbs": {h["slug"]: {"n": h["name"], "ix": [[k, l, n] for k, l, n in h["ix"]]} for h in HERBS},
            "classes": {c[0]: [c[1], c[2]] for c in CLASSES}}
-    write("assets/js/ix-data.js", "window.HK_IX=%s;\n" % json.dumps(ixd, ensure_ascii=False))
+    files["assets/js/ix-data.js"] = "window.HK_IX=%s;\n" % json.dumps(ixd, ensure_ascii=False)
 
     # search index
     idx = []
@@ -697,26 +828,56 @@ def build():
     for p, t, d in OUT:
         if not p.startswith(("herbs/", "concerns/", "learn/")) and p not in ("404.html",):
             idx.append({"t": t, "s": d, "u": p.replace("index.html", ""), "k": "Page"})
-    write("assets/search.json", json.dumps(idx, ensure_ascii=False))
+    files["assets/search.json"] = json.dumps(idx, ensure_ascii=False)
 
-    # sitemap
+    # sitemap, robots, ads.txt, manifest
     urls = sorted({p for p, _, _ in OUT if p != "404.html"})
     sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for p in urls:
         pri = "1.0" if p == "index.html" else ("0.8" if p.startswith(("herbs/", "concerns/", "learn/")) else "0.6")
         sm.append("<url><loc>%s</loc><lastmod>%s</lastmod><priority>%s</priority></url>" % (xesc(canonical(p)), REVIEWED_ISO, pri))
     sm.append("</urlset>")
-    write("sitemap.xml", "\n".join(sm) + "\n")
-    write("robots.txt", "User-agent: *\nAllow: /\n\nSitemap: %s/sitemap.xml\n" % SITE_URL)
-    write("ads.txt", "google.com, pub-6620975821265271, DIRECT, f08c47fec0942fa0\n")
-    write(".nojekyll", "")
-    write("site.webmanifest", json.dumps({
+    files["sitemap.xml"] = "\n".join(sm) + "\n"
+    files["robots.txt"] = "User-agent: *\nAllow: /\n\nSitemap: %s/sitemap.xml\n" % SITE_URL
+    files["ads.txt"] = "google.com, pub-6620975821265271, DIRECT, f08c47fec0942fa0\n"
+    files["site.webmanifest"] = json.dumps({
         "name": "Hakeem.com", "short_name": "Hakeem", "start_url": "./", "display": "standalone",
         "background_color": "#EEF1EA", "theme_color": "#1F2A44",
-        "icons": [{"src": "assets/img/icon-192.png", "sizes": "192x192", "type": "image/png"},
-                  {"src": "assets/img/icon-512.png", "sizes": "512x512", "type": "image/png"}]}, indent=1))
-    print("Built %d pages (%d herbs, %d concern hubs, %d guides)." % (len(OUT), len(HERBS), len(HUBS), len(guides)))
+        "icons": [{"src": "assets/img/favicon.svg", "sizes": "any", "type": "image/svg+xml"}]}, indent=1)
+    for p, c in files.items():
+        write(base, p, c)
+
+    if html_dir:
+        has_png = os.path.exists(os.path.join(ROOT, "assets", "img", "og.png"))
+        for pg in PAGES:
+            write(html_dir, pg["path"], render_html(pg, has_png))
+        for sub in ("assets/css", "assets/js", "assets/img"):
+            src = os.path.join(ROOT, sub)
+            for f in os.listdir(src):
+                if f not in ("ix-data.js",) and os.path.isfile(os.path.join(src, f)):
+                    with open(os.path.join(src, f), "rb") as a:
+                        os.makedirs(os.path.join(html_dir, sub), exist_ok=True)
+                        with open(os.path.join(html_dir, sub, f), "wb") as b:
+                            b.write(a.read())
+        if os.path.exists(os.path.join(ROOT, "CNAME")):
+            write(html_dir, "CNAME", open(os.path.join(ROOT, "CNAME")).read())
+        where = html_dir
+    else:
+        for name, src in jekyll_layouts().items():
+            write(ROOT, "_layouts/%s.html" % name, src)
+        write(ROOT, "_data/tiles.yml", "".join("%s: %s\n" % (k, yq(v)) for k, v in TILES.items()))
+        write(ROOT, "_config.yml", CONFIG)
+        for pg in PAGES:
+            write(ROOT, pg["path"], page_source(pg))
+        stale = os.path.join(ROOT, ".nojekyll")
+        if os.path.exists(stale):  # .nojekyll would switch off the Jekyll build on GitHub Pages
+            os.remove(stale)
+        where = "the Jekyll source tree"
+    print("Built %d pages (%d herbs, %d concern hubs, %d guides) into %s." % (len(OUT), len(HERBS), len(HUBS), len(guides), where))
 
 
 if __name__ == "__main__":
-    build()
+    if len(sys.argv) == 3 and sys.argv[1] == "--html":
+        build(os.path.abspath(sys.argv[2]))
+    else:
+        build()

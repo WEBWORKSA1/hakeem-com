@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """Render the share image (og.png) and app icons from favicon.svg.
 
-Runs in the Publish workflow after `pip install playwright` and
-`python -m playwright install --with-deps chromium`.
+Optional. Needs `pip install playwright` and `python -m playwright install --with-deps chromium`.
+Upload the three PNGs to assets/img/; the share-image tags then switch on automatically.
 """
 import os
 from playwright.sync_api import sync_playwright
