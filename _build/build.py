@@ -702,7 +702,7 @@ def liquidize(text):
 
 def yq(v):
     """YAML single-quoted scalar: no backslash escapes, quotes doubled."""
-    if re.search("[\n\r\u0085  ﻿]", v):
+    if any(ch in v for ch in "\n\r") or any(ord(ch) in (0x85, 0x2028, 0x2029, 0xFEFF) for ch in v):
         raise SystemExit("Line break inside a front matter value: %r" % v[:60])
     return "'" + v.replace("'", "''") + "'"
 
