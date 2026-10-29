@@ -66,7 +66,7 @@ Research date: 29 October 2026. Sites were visited directly where possible; wher
 5. **Mizaj quiz** — full result on screen, optional email, separate unticked consents, red-flag messaging.
 6. **Concern hubs** (digestion, heart, blood sugar, mood and sleep, pain, skin and mouth, women's health, colds) for internal linking.
 7. **Glossary** of Unani terms.
-8. **Lead funnel**: three-step consultation request + five-section practitioner listing application with Free / Verified / Featured plans.
+8. **Lead funnel**: three-step consultation request + four-step practitioner listing application with Free / Verified / Featured plans.
 9. **Support**: one-time/monthly toggle, presets with impact lines, fund allocation, supporter tiers, sponsorship tiers, Adopt-an-Herb.
 10. **Contests**: tiered prizes, countdown, judging criteria, official rules, no purchase necessary.
 11. **Trust pages**: about, editorial policy, evidence method, corrections, advertising policy, medical disclaimer, privacy, cookies, terms, trademark/copyright disclosure.
