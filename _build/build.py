@@ -468,8 +468,7 @@ def herb_page(h):
     layout(path, "%s: uses, evidence and safety" % h["name"], desc[:158], "", ld=ld, ogtype="article", kind="herb", fields=fields)
 
 
-HERB_TPL = """
-<article>
+HERB_TPL = """<article>
 <section class="page-hero" style="padding-bottom:36px">
  <div class="wrap">
   <nav class="crumbs" aria-label="Breadcrumb"><a href="{root}index.html">Home</a> / <a href="{root}herbs/">Herb library</a> / {name}</nav>
@@ -562,8 +561,7 @@ def hub_page(hb):
            ld=[breadcrumb_ld([("Home", ""), ("Health concerns", "concerns/"), (hb["title"], path)])], kind="hub", fields=fields)
 
 
-HUB_TPL = """
-<section class="page-hero"><div class="wrap">
+HUB_TPL = """<section class="page-hero"><div class="wrap">
  <nav class="crumbs" aria-label="Breadcrumb"><a href="{root}index.html">Home</a> / <a href="{root}concerns/">Health concerns</a> / {title}</nav>
  <h1>{title}</h1><p class="lead">{intro}</p></div></section>
 <section><div class="wrap article"><div class="prose">
@@ -646,8 +644,7 @@ def guide_fields(meta, body, root, guides):
                 toc=('<div class="aside-box toc"><h3>On this page</h3><ol>%s</ol></div>' % toc) if toc else "")
 
 
-GUIDE_TPL = """
-<article>
+GUIDE_TPL = """<article>
 <section class="page-hero"><div class="wrap"><div style="max-width:780px">
  <nav class="crumbs" aria-label="Breadcrumb"><a href="{root}index.html">Home</a> / <a href="{root}learn/">Learn</a> / {cat}</nav>
  <h1>{title}</h1><p class="lead">{summary}</p></div></div></section>
